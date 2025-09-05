@@ -2,8 +2,7 @@ import { useState } from 'react'
 
 interface InterestsProps {
   data: {
-    interests: string[]
-    experience: string
+    interests?: string[]
   }
   onUpdate: (data: any) => void
   onNext: () => void
@@ -12,26 +11,28 @@ interface InterestsProps {
 
 export function Interests({ data, onUpdate, onNext, onBack }: InterestsProps) {
   const [interests, setInterests] = useState<string[]>(data.interests || [])
-  const [experience, setExperience] = useState(data.experience || '')
 
-  const programInterests = [
-    'Education Support',
-    'Healthcare Outreach',
-    'Women Empowerment',
-    'Humanitarian Aid'
+  const programOptions = [
+    'Youth Mentoring',
+    'Educational Workshops',
+    'Community Outreach',
+    'Healthcare Support',
+    'Environmental Programs',
+    'Administrative Support',
+    'Event Planning',
+    'Fundraising'
   ]
 
   const handleInterestChange = (interest: string) => {
-    setInterests(prev => 
-      prev.includes(interest)
-        ? prev.filter(i => i !== interest)
-        : [...prev, interest]
-    )
+    const newInterests = interests.includes(interest)
+      ? interests.filter(i => i !== interest)
+      : [...interests, interest]
+    setInterests(newInterests)
   }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onUpdate({ ...data, interests, experience })
+    onUpdate({ interests })
     onNext()
   }
 
@@ -39,30 +40,23 @@ export function Interests({ data, onUpdate, onNext, onBack }: InterestsProps) {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <h3 className="text-lg font-medium text-gray-900">Program Interests</h3>
-        <div className="mt-2 grid grid-cols-2 gap-2">
-          {programInterests.map(program => (
-            <label key={program} className="inline-flex items-center">
-              <input
-                type="checkbox"
-                checked={interests.includes(program)}
-                onChange={() => handleInterestChange(program)}
-                className="rounded border-gray-300 text-teal-600 focus:ring-teal-500"
-              />
-              <span className="ml-2">{program}</span>
-            </label>
-          ))}
-        </div>
+        <p className="mt-1 text-sm text-gray-600">
+          Select the programs you're interested in volunteering for
+        </p>
       </div>
 
-      <div>
-        <h3 className="text-lg font-medium text-gray-900">Experience</h3>
-        <textarea
-          value={experience}
-          onChange={(e) => setExperience(e.target.value)}
-          rows={4}
-          className="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500"
-          placeholder="Tell us about your relevant experience..."
-        />
+      <div className="space-y-4">
+        {programOptions.map((program) => (
+          <label key={program} className="flex items-center">
+            <input
+              type="checkbox"
+              checked={interests.includes(program)}
+              onChange={() => handleInterestChange(program)}
+              className="rounded border-gray-300 text-teal-600 focus:ring-teal-500"
+            />
+            <span className="ml-3 text-sm text-gray-700">{program}</span>
+          </label>
+        ))}
       </div>
 
       <div className="flex justify-between">
@@ -77,7 +71,7 @@ export function Interests({ data, onUpdate, onNext, onBack }: InterestsProps) {
           type="submit"
           className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700"
         >
-          Next Step
+          Next
         </button>
       </div>
     </form>
