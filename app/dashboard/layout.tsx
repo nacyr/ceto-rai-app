@@ -16,7 +16,8 @@ import {
   FileText,
   Bell,
   User,
-  Shield
+  Shield,
+  Search
 } from 'lucide-react'
 
 interface DashboardLayoutProps {

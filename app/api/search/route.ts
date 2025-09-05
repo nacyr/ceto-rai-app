@@ -62,8 +62,8 @@ export async function GET(request: Request) {
     if (type === 'all') {
       const [profileCount, donationCount, volunteerCount] = await Promise.all([
         supabase.from('profiles').select('count', { count: 'exact' }).or(`full_name.ilike.%${searchTerm}%,email.ilike.%${searchTerm}%`),
-        supabase.from('donations').select('count', { count: 'exact' }).or(`program.ilike.%${searchTerm}%`).then(res => res.count || 0),
-        supabase.from('volunteers').select('count', { count: 'exact' }).or(`skills.cs.{${searchTerm}},availability.ilike.%${searchTerm}%`).then(res => res.count || 0)
+        supabase.from('donations').select('count', { count: 'exact' }).or(`program.ilike.%${searchTerm}%`),
+        supabase.from('volunteers').select('count', { count: 'exact' }).or(`skills.cs.{${searchTerm}},availability.ilike.%${searchTerm}%`)
       ])
 
       totalCounts = {
@@ -129,10 +129,13 @@ export async function POST(request: Request) {
         profileQuery = profileQuery.lte('created_at', filters.createdBefore)
       }
 
-      const { data, count } = await profileQuery
+      const { data } = await profileQuery
         .order(sortBy, { ascending: sortOrder === 'asc' })
         .range(offset, offset + limit - 1)
-        .select('*', { count: 'exact' })
+
+      const { count } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true })
 
       if (data) {
         results = results.concat(data.map(p => ({ ...p, type: 'profile' })))
@@ -171,10 +174,13 @@ export async function POST(request: Request) {
         donationQuery = donationQuery.lte('created_at', filters.createdBefore)
       }
 
-      const { data, count } = await donationQuery
+      const { data } = await donationQuery
         .order(sortBy, { ascending: sortOrder === 'asc' })
         .range(offset, offset + limit - 1)
-        .select('*', { count: 'exact' })
+
+      const { count } = await supabase
+        .from('donations')
+        .select('*', { count: 'exact', head: true })
 
       if (data) {
         results = results.concat(data.map(d => ({ ...d, type: 'donation' })))
@@ -209,10 +215,13 @@ export async function POST(request: Request) {
         volunteerQuery = volunteerQuery.lte('created_at', filters.createdBefore)
       }
 
-      const { data, count } = await volunteerQuery
+      const { data } = await volunteerQuery
         .order(sortBy, { ascending: sortOrder === 'asc' })
         .range(offset, offset + limit - 1)
-        .select('*', { count: 'exact' })
+
+      const { count } = await supabase
+        .from('volunteers')
+        .select('*', { count: 'exact', head: true })
 
       if (data) {
         results = results.concat(data.map(v => ({ ...v, type: 'volunteer' })))

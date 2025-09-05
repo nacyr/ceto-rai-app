@@ -214,7 +214,7 @@ export async function GET(request: Request) {
         
         const skillStats: { [key: string]: number } = {}
         volunteersImpact.data?.forEach(volunteer => {
-          volunteer.skills?.forEach(skill => {
+          volunteer.skills?.forEach((skill: string) => {
             skillStats[skill] = (skillStats[skill] || 0) + 1
           })
         })

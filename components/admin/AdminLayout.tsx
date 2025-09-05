@@ -1,3 +1,5 @@
+"use client"
+
 import { ReactNode } from 'react'
 import { Users, DollarSign, BarChart, Settings } from 'lucide-react'
 import Link from 'next/link'

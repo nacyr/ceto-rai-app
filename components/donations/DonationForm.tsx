@@ -1,18 +1,27 @@
 import { useState } from 'react'
 import { useDonations } from '@/hooks/useDonations'
+import { useAuth } from '@/app/contexts/AuthContext'
 import { formatCurrency } from '@/utils/formatters'
 
 export function DonationForm() {
   const [amount, setAmount] = useState('')
   const [program, setProgram] = useState('education')
   const { createDonation, loading, error } = useDonations()
+  const { user } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!user) {
+      alert('Please log in to make a donation')
+      return
+    }
+    
     try {
       await createDonation({
         amount: parseFloat(amount),
         program,
+        donor_id: user.id,
+        status: 'pending'
       })
       setAmount('')
       // Show success message

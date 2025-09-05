@@ -2,16 +2,26 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/app/lib/supabase';
 import { useAuth } from '@/app/contexts/AuthContext';
 
+interface VolunteerApplication {
+  id: string;
+  user_id: string;
+  status: 'pending' | 'approved' | 'rejected';
+  interests: string[];
+  skills: string[];
+  created_at: string;
+  updated_at: string;
+}
+
 export function VolunteerTracker() {
   const { user } = useAuth();
-  const [application, setApplication] = useState<any>(null);
+  const [application, setApplication] = useState<VolunteerApplication | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
       fetchApplication();
     }
-  }, [user]);
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchApplication = async () => {
     try {

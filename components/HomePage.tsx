@@ -1,27 +1,37 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { GraduationCap } from 'heroicons-react';
+import { useRouter } from 'next/navigation';
+import { BookOpen, Heart, Users, Home } from 'lucide-react';
 
 const impactStats = [
   {
-    icon: <GraduationCap className="w-12 h-12 text-teal-600" />,
+    icon: <BookOpen className="w-12 h-12 text-teal-600" />,
     number: '1,200+',
     description: 'children supported with school materials',
     link: '/programs#education'
   },
-  // ...existing code...
+  {
+    icon: <Heart className="w-12 h-12 text-teal-600" />,
+    number: '500+',
+    description: 'families received healthcare support',
+    link: '/programs#healthcare'
+  },
+  {
+    icon: <Users className="w-12 h-12 text-teal-600" />,
+    number: '300+',
+    description: 'women empowered through skill training',
+    link: '/programs#women'
+  }
 ];
 
 const HomePage = () => {
   const router = useRouter();
 
-  const onNavigate = (link) => {
+  const onNavigate = (link: string) => {
     router.push(link);
   };
 
   return (
     <div>
-      {/* ...existing code... */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {impactStats.map((stat, index) => (
           <div
@@ -40,13 +50,12 @@ const HomePage = () => {
       </div>
       <div className="mt-8 text-center">
         <button
-          onClick={() => onNavigate('volunteer')}
+          onClick={() => onNavigate('/volunteer')}
           className="bg-white hover:bg-gray-100 text-teal-700 px-10 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
         >
           Become a Volunteer
         </button>
       </div>
-      {/* ...existing code... */}
     </div>
   );
 };

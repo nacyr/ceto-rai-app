@@ -3,7 +3,7 @@ import { supabase } from '@/app/lib/supabase'
 import { formatCurrency, formatDate } from '@/utils/formatters'
 
 export function DonationManager() {
-  const [donations, setDonations] = useState([])
+  const [donations, setDonations] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('all')
 

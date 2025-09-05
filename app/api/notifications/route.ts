@@ -118,7 +118,29 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Invalid notification type' }, { status: 400 })
     }
 
-    const { subject, html } = template(data.name, data.amount, data.program, data.skills, data.availability, data.status, data.impact)
+    let result: { subject: string; html: string }
+    
+    switch (type) {
+      case 'donationReceipt':
+        result = templates.donationReceipt(data.name, data.amount, data.program)
+        break
+      case 'volunteerWelcome':
+        result = templates.volunteerWelcome(data.name, data.skills, data.availability)
+        break
+      case 'volunteerApproved':
+        result = templates.volunteerApproved(data.name)
+        break
+      case 'donationUpdate':
+        result = templates.donationUpdate(data.name, data.status)
+        break
+      case 'impactReport':
+        result = templates.impactReport(data.name, data.program, data.impact)
+        break
+      default:
+        return NextResponse.json({ error: 'Invalid notification type' }, { status: 400 })
+    }
+
+    const { subject, html } = result
     
     await sendEmail(recipient, subject, html)
 

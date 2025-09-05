@@ -9,7 +9,7 @@ export function DonationPage() {
     <div className="max-w-3xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Make a Donation</h1>
       <div className="bg-white shadow rounded-lg p-6">
-        <DonationForm onSuccess={() => setShowToast(true)} />
+        <DonationForm />
       </div>
       
       {showToast && (

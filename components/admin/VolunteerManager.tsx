@@ -3,7 +3,7 @@ import { supabase } from '@/app/lib/supabase'
 import { formatDate } from '@/utils/formatters'
 
 export function VolunteerManager() {
-  const [volunteers, setVolunteers] = useState([])
+  const [volunteers, setVolunteers] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

@@ -1,9 +1,21 @@
 import { useState } from 'react'
 
-export function PersonalInfo({ data, onUpdate, onNext }) {
+interface PersonalInfoProps {
+  data: {
+    personalInfo: {
+      fullName?: string
+      phone?: string
+      motivation?: string
+    }
+  }
+  onUpdate: (data: any) => void
+  onNext: () => void
+}
+
+export function PersonalInfo({ data, onUpdate, onNext }: PersonalInfoProps) {
   const [form, setForm] = useState(data.personalInfo)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     onUpdate({ ...data, personalInfo: form })
     onNext()

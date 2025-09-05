@@ -118,12 +118,23 @@ export async function updateVolunteerStatus(id: string, status: string, adminNot
   return data
 }
 
-export async function getDonationAnalytics(type: string, filters?: Record<string, string>) {
-  const { data, error } = await supabase
+export async function getDonationAnalytics(type: string, userId?: string, filters?: Record<string, string>) {
+  let query = supabase
     .from('donations')
     .select()
-    .eq('donor_id', userId)
     .order('created_at', { ascending: false })
+
+  if (userId) {
+    query = query.eq('donor_id', userId)
+  }
+
+  if (filters) {
+    Object.entries(filters).forEach(([key, value]) => {
+      query = query.eq(key, value)
+    })
+  }
+
+  const { data, error } = await query
 
   if (error) throw error
   return data
@@ -191,7 +202,53 @@ export async function getVolunteerStats() {
   }
 }
 
+// Volunteer Management
+export async function createVolunteerApplication(application: Database['public']['Tables']['volunteers']['Insert']) {
+  const { data, error } = await supabase
+    .from('volunteers')
+    .insert(application)
+    .select()
+    .single()
+
+  if (error) throw error
+  return data
+}
+
 // Analytics and Reports
+export async function getDonationStats() {
+  const { data: totalDonations, error: totalError } = await supabase
+    .from('donations')
+    .select('*', { count: 'exact' })
+
+  const { data: pendingDonations, error: pendingError } = await supabase
+    .from('donations')
+    .select('*', { count: 'exact' })
+    .eq('status', 'pending')
+
+  const { data: completedDonations, error: completedError } = await supabase
+    .from('donations')
+    .select('*', { count: 'exact' })
+    .eq('status', 'completed')
+
+  const { data: totalAmount, error: amountError } = await supabase
+    .from('donations')
+    .select('amount')
+    .eq('status', 'completed')
+
+  if (totalError || pendingError || completedError || amountError) {
+    throw totalError || pendingError || completedError || amountError
+  }
+
+  const totalRaised = totalAmount?.reduce((sum, donation) => sum + (donation.amount || 0), 0) || 0
+
+  return {
+    totalCount: totalDonations?.length || 0,
+    pendingCount: pendingDonations?.length || 0,
+    completedCount: completedDonations?.length || 0,
+    totalRaised
+  }
+}
+
 export async function getDashboardStats() {
   const [donationStats, volunteerStats] = await Promise.all([
     getDonationStats(),
@@ -205,7 +262,7 @@ export async function getDashboardStats() {
 }
 
 // Email and Notification Utilities
-export async function sendNotification(type: string, data: any) {
+export async function sendNotification(type: string, data: Record<string, unknown>) {
   // This would integrate with your email service
   // For now, we'll log the notification
   console.log(`Notification: ${type}`, data)
