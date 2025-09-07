@@ -110,7 +110,8 @@ const AboutPage: React.FC = () => {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Leadership Team</h2>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-4">
+{/*           <div className="grid md:grid-cols-4 gap-4 max-w-8rem"> */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-screen-xl mx-auto">
             {teamMembers.map((member, index) => (
               <div key={index} className="text-center p-6 bg-gray-50 rounded-xl">
                 <div className="w-24 h-24 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-4">
