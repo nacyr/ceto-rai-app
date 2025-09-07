@@ -16,9 +16,10 @@ interface ValueCard {
 
 const AboutPage: React.FC = () => {
   const teamMembers: TeamMember[] = [
-    { name: 'Dr. Sarah Johnson', role: 'Executive Director' },
-    { name: 'Michael Chen', role: 'Program Director' },
-    { name: 'Amina Hassan', role: 'Operations Manager' }
+    { name: 'Dr. Auwal Muhammad', role: 'Executive Director' },
+    { name: 'Umar Jalo', role: 'Secretary' },
+    { name: 'Shareefa Naseh', role: 'Operations Manager' },
+    { name: 'Nasir Armiyau', role: 'IT Support Officer' },
   ];
 
   const values: ValueCard[] = [
