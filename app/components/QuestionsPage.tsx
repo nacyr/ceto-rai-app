@@ -1,5 +1,5 @@
-import { QuestionForm } from '../questions/QuestionForm';
-import { QuestionList } from '../questions/QuestionList';
+import { QuestionForm } from './questions/QuestionForm';
+import { QuestionList } from './questions/QuestionList';
 
 export function QuestionsPage() {
   return (
