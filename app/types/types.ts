@@ -19,3 +19,9 @@ export interface ValueCard {
   title: string;
   description: string;
 }
+
+export interface ImpactStats {
+  icon: React.ElementType;
+  number: string;
+  description: string;
+}

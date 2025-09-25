@@ -1,32 +1,10 @@
 'use client'
 
-// File: pages/HomePage.tsx
-import React from 'react';
-import { GraduationCap, Heart, Users } from 'lucide-react';
+import Link from "next/link";
+import { impactStats } from "../mock-data/homePageImpactStats";
 
-interface HomePageProps {
-  onNavigate: (page: string) => void;
-}
-
-export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
-  const impactStats = [
-    {
-      icon: <GraduationCap className="w-12 h-12 text-teal-600" />,
-      number: '1,200+',
-      description: 'children supported with school materials'
-    },
-    {
-      icon: <Heart className="w-12 h-12 text-teal-600" />,
-      number: '500+',
-      description: 'individuals reached through health outreaches'
-    },
-    {
-      icon: <Users className="w-12 h-12 text-teal-600" />,
-      number: '300+',
-      description: 'women empowered through skills training'
-    }
-  ];
-
+export const HomePage: React.FC = () => {
+  
   return (
     <div>
       <section className="relative min-h-screen flex items-center">
@@ -50,18 +28,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               communities through education, healthcare, empowerment, and humanitarian aid.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button 
-                onClick={() => onNavigate('about')}
+              <Link
+                href="/about"
                 className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
               >
                 About Us
-              </button>
-              <button 
-                onClick={() => onNavigate('programs')}
+              </Link>
+              <Link
+                href="/programs"
                 className="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
               >
                 Our Programs
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -72,7 +50,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Impact</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Together, we're making measurable differences in communities across the region
+              Together, we&apos;re making measurable differences in communities across the region
             </p>
           </div>
 
@@ -83,7 +61,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 className="text-center p-8 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className="flex justify-center mb-6">
-                  {stat.icon}
+                  <stat.icon className="w-12 h-12 text-teal-600" />
                 </div>
                 <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                   {stat.number}
@@ -106,18 +84,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             Your support can transform lives and bring hope to those who need it most
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button 
-              onClick={() => onNavigate('get-involved')}
+            <Link
+              href="/get-involved"
               className="bg-white hover:bg-gray-100 text-teal-700 px-10 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
             >
               Become a Volunteer
-            </button>
-            <button 
-              onClick={() => onNavigate('get-involved')}
+            </Link>
+            <Link
+              href="/get-involved"
               className="bg-teal-800 hover:bg-teal-900 border-2 border-white text-white px-10 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
             >
               Donate Now
-            </button>
+            </Link>
           </div>
         </div>
       </section>
