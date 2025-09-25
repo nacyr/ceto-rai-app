@@ -10,7 +10,7 @@ export const teamMembers: TeamMember[] = [
       location: 'Abuja, Nigeria',
       joinDate: 'September 2020',
       image: '/images/team/sani1.jpeg', 
-      bio: 'Mahabubu Sani is the Chairman and Chief Executive Officer of Ceto Rai Humanitarian Foundation . He holds a Master’s degree in Treasury Management and a Bachelor’s degree in Business Administration. He is also a distinguished member of the Chartered Institute of Management. With over a decade of experience in financial management and strategic planning, Mahabubu has been instrumental in steering the foundation towards achieving its mission of empowering underserved communities. His expertise in tax planning, compliance, and advisory services has significantly contributed to the foundation’s growth and sustainability.',
+      bio: 'Mahabubu Sani is the Chairman and Chief Executive Officer of Ceto Rai Humanitarian Foundation . He holds a Masters degree in Treasury Management and a Bachelors degree in Business Administration. He is also a distinguished member of the Chartered Institute of Management. With over a decade of experience in financial management and strategic planning, Mahabubu has been instrumental in steering the foundation towards achieving its mission of empowering underserved communities. His expertise in tax planning, compliance, and advisory services has significantly contributed to the foundations growth and sustainability.',
       education: [
         'Master’s degree in Treasury Management, University of Abuja',
         'Bachelor’s degree in Business Administration',

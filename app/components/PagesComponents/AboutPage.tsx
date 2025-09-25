@@ -70,7 +70,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Leadership Team</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Meet the dedicated individuals leading our mission to create lasting change in communities
+              Meet the dedicated individuals leading our mission to create lasting change in communities 
             </p>
           </div>
           <div className="flex flex-wrap justify-center gap-6">
