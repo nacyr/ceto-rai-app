@@ -1,41 +1,38 @@
-'use client'
+'use client';
 
-import React from 'react';
 import { DollarSign, Users, Handshake } from 'lucide-react';
+import Link from 'next/link';
 
-interface InvolvementOption {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  buttonText: string;
-  buttonStyle: string;
-} 
+const involvementOptions = [
+  {
+    icon: <DollarSign className="w-8 h-8 text-teal-600" />,
+    title: 'Donate',
+    description: 'Your financial contribution directly supports our programs and helps us reach more communities.',
+    href: '/get-involved/donate',
+    buttonText: 'Donate Now',
+    buttonStyle: 'bg-teal-600 hover:bg-teal-700 text-white',
+  },
+  {
+    icon: <Users className="w-8 h-8 text-teal-600" />,
+    title: 'Volunteer',
+    description: 'Join our team of dedicated volunteers and make a direct impact in communities we serve.',
+    href: '/get-involved/volunteer',
+    buttonText: 'Join Us',
+    buttonStyle: 'bg-white hover:bg-gray-50 border-2 border-teal-600 text-teal-600',
+  },
+  {
+    icon: <Handshake className="w-8 h-8 text-teal-600" />,
+    title: 'Partner',
+    description: 'Collaborate with us as a corporate partner to amplify our collective impact.',
+    href: '/get-involved/partnership',
+    buttonText: 'Partner With Us',
+    buttonStyle: 'bg-white hover:bg-gray-50 border-2 border-teal-600 text-teal-600',
+  },
+];
 
-const GetInvolvedPage: React.FC = () => {
-  const involvementOptions: InvolvementOption[] = [
-    {
-      icon: <DollarSign className="w-8 h-8 text-teal-600" />,
-      title: 'Donate',
-      description: 'Your financial contribution directly supports our programs and helps us reach more communities.',
-      buttonText: 'Donate Now',
-      buttonStyle: 'bg-teal-600 hover:bg-teal-700 text-white'
-    },
-    {
-      icon: <Users className="w-8 h-8 text-teal-600" />,
-      title: 'Volunteer',
-      description: 'Join our team of dedicated volunteers and make a direct impact in communities we serve.',
-      buttonText: 'Join Us',
-      buttonStyle: 'bg-white hover:bg-gray-50 border-2 border-teal-600 text-teal-600'
-    },
-    {
-      icon: <Handshake className="w-8 h-8 text-teal-600" />,
-      title: 'Partner',
-      description: 'Collaborate with us as a corporate partner to amplify our collective impact.',
-      buttonText: 'Partner With Us',
-      buttonStyle: 'bg-white hover:bg-gray-50 border-2 border-teal-600 text-teal-600'
-    }
-  ];
-
+export default function GetInvolvedPage() {
+  
+  // Render main Get Involved page
   return (
     <div>
       {/* Hero Section */}
@@ -52,18 +49,24 @@ const GetInvolvedPage: React.FC = () => {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8">
-            {involvementOptions.map((option, index) => (
-              <div key={index} className="text-center p-8 border-2 border-gray-200 rounded-xl hover:border-teal-300 transition-all duration-300">
-                <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                  {option.icon}
+            {involvementOptions.map((option, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col justify-between text-center p-8 border-2 border-gray-200 rounded-xl hover:border-teal-300 hover:shadow-lg transition-all duration-300 group"
+              >
+                <div>
+                  <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-teal-200 transition-colors">
+                    {option.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">{option.title}</h3>
+                  <p className="text-gray-600 mb-6">{option.description}</p>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{option.title}</h3>
-                <p className="text-gray-600 mb-6">
-                  {option.description}
-                </p>
-                <button className={`${option.buttonStyle} px-6 py-3 rounded-lg font-semibold transition-all duration-300 w-full`}>
+                <Link
+                  href={option.href}
+                  className={`${option.buttonStyle} px-6 py-3 rounded-lg font-semibold transition-all duration-300 block transform group-hover:scale-105 mt-auto`}
+                >
                   {option.buttonText}
-                </button>
+                </Link>
               </div>
             ))}
           </div>
@@ -112,6 +115,4 @@ const GetInvolvedPage: React.FC = () => {
       </section>
     </div>
   );
-};
-
-export default GetInvolvedPage;
+}
