@@ -91,7 +91,7 @@ export const HomePage: React.FC = () => {
               Become a Volunteer
             </Link>
             <Link
-              href="/get-involved"
+              href="/get-involved/donate"
               className="bg-teal-800 hover:bg-teal-900 border-2 border-white text-white px-10 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
             >
               Donate Now
