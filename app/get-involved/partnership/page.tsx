@@ -564,8 +564,8 @@ const PartnershipPage: React.FC<PartnershipPageProps> = ({ onBack }) => {
                   <h3 className="font-semibold text-blue-900 mb-2">Next Steps:</h3>
                   <ul className="text-blue-800 text-sm space-y-1">
                     <li>• Partnership team will review your application within 5-7 business days</li>
-                    <li>• You'll receive a follow-up call to discuss partnership details</li>
-                    <li>• If approved, we'll schedule a formal partnership meeting</li>
+                    <li>• You&apos;ll receive a follow-up call to discuss partnership details</li>
+                    <li>• If approved, we&apos;ll schedule a formal partnership meeting</li>
                     <li>• Partnership agreement will be drafted and finalized</li>
                   </ul>
                 </div>

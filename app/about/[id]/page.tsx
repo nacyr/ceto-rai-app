@@ -1,7 +1,7 @@
 'use client';
 
 import TeamMemberProfile from '@/app/components/PagesComponents/TeamMemberProfile';
-import { teamMembers } from '@/mockData/teamMembers';
+import { teamMembers } from '@/app/mock-data/teamMembers';
 import { useParams } from 'next/navigation';
 
 export default function TeamMemberPage() {
