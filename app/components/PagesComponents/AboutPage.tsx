@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Heart, User } from 'lucide-react';
-import { teamMembers } from '@/app/mock-data/teamMembers';
-import { values } from '@/app/mock-data/about';
+import { teamMembers } from '@/mockData/teamMembers';
+import { values } from '@/mockData/about';
 
 export default function AboutPage() {
   return (
@@ -103,30 +103,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-
-{/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-  {teamMembers.map((member) => (
-    <Link
-      key={member.id}
-      href={`/about/${member.id}`}
-      className="block text-center p-6 bg-gray-50 rounded-xl hover:bg-teal-50 hover:shadow-lg transition-all duration-300"
-    >
-      <div className="w-24 h-24 mx-auto mb-4">
-        {member.profileImage ? (
-          <Image
-            src={member.profileImage}
-            alt={member.name}
-            width={96}
-            height={96}
-            className="rounded-full object-cover"
-          />
-        ) : (
-          <User className="w-16 h-16 text-teal-600 mx-auto" />
-        )}
-      </div>
-      <h3 className="text-xl font-bold text-gray-900">{member.name}</h3>
-      <p className="text-teal-600">{member.role}</p>
-    </Link>
-  ))}
-</div> */}

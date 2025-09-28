@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { impactStats } from "../mock-data/homePageImpactStats";
+import { impactStats } from "../../mockData/homePageImpactStats";
 
 export const HomePage: React.FC = () => {
   
@@ -85,13 +85,13 @@ export const HomePage: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
-              href="/get-involved"
+              href="/get-involved/volunteer"
               className="bg-white hover:bg-gray-100 text-teal-700 px-10 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105"
             >
               Become a Volunteer
             </Link>
             <Link
-              href="/get-involved"
+              href="/get-involved/donate"
               className="bg-teal-800 hover:bg-teal-900 border-2 border-white text-white px-10 py-4 rounded-lg font-semibold text-lg transition-all duration-300"
             >
               Donate Now

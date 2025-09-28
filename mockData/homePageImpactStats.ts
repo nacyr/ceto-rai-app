@@ -1,5 +1,5 @@
 import { GraduationCap, Heart, Users } from "lucide-react";
-import { ImpactStats } from "../types/types";
+import { ImpactStats } from "../app/types/types";
 
 // className="w-12 h-12 text-teal-600" 
 export const impactStats: ImpactStats[] = [
