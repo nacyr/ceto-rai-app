@@ -1,8 +1,8 @@
-import { ValueCard } from "../types/types";
+import { ValueCard } from "../app/types/types";
 import { Target, Eye, Award } from 'lucide-react';
 
 export const values: ValueCard[] = [
-  {
+  { 
     icon: Target,
     title: "Our Mission",
     description:

@@ -1,0 +1,93 @@
+{
+  "donationOptions": [
+    {
+      "id": "1",
+      "amount": 25,
+      "description": "School Supplies",
+      "impact": "Provides school materials for 5 children"
+    },
+    {
+      "id": "2",
+      "amount": 50,
+      "description": "Healthcare Support",
+      "impact": "Basic healthcare for 3 families"
+    },
+    {
+      "id": "3",
+      "amount": 100,
+      "description": "Skills Training",
+      "impact": "Training materials for 10 women"
+    },
+    {
+      "id": "4",
+      "amount": 250,
+      "description": "Family Support",
+      "impact": "Emergency aid for 5 families"
+    },
+    {
+      "id": "5",
+      "amount": 500,
+      "description": "Program Sponsorship",
+      "impact": "Sponsor a complete program cycle"
+    },
+    {
+      "id": "6",
+      "amount": 1000,
+      "description": "Community Impact",
+      "impact": "Transform an entire community"
+    }
+  ],
+  "programs": [
+    {
+      "id": "general",
+      "name": "General Fund",
+      "description": "Support where the need is greatest",
+      "icon": "heart",
+      "color": "bg-red-500"
+    },
+    {
+      "id": "education",
+      "name": "Education Support",
+      "description": "School supplies, scholarships, and infrastructure",
+      "icon": "dollar-sign",
+      "color": "bg-blue-500"
+    },
+    {
+      "id": "healthcare",
+      "name": "Healthcare Outreach",
+      "description": "Medical clinics and health education",
+      "icon": "heart",
+      "color": "bg-green-500"
+    },
+    {
+      "id": "empowerment",
+      "name": "Women Empowerment",
+      "description": "Skills training and microfinance",
+      "icon": "dollar-sign",
+      "color": "bg-purple-500"
+    }
+  ],
+  "bankDetails": {
+    "accountNumber": "0007536428",
+    "bankName": "TAJ Bank",
+    "accountName": "Ceto Rai Humanitarian Foundation",
+    "currency": "NGN"
+  },
+
+  "bankAccounts": {
+    "NGN": {
+      "accountNumber": "0007536428",
+      "bankName": "TAJ Bank",
+      "accountName": "Ceto Rai Humanitarian Foundation",
+      "currency": "NGN"
+    },
+    "USD": {
+      "accountNumber": "0000000010",
+      "bankName": "Standard Chartered Bank",
+      "accountName": "Ceto Rai Humanitarian Foundation",
+      "currency": "USD"
+    }
+  }
+}
+
+

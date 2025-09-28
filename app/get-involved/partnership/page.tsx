@@ -3,43 +3,8 @@
 import React, { useState } from 'react';
 import { Handshake, Building2, Users, Target, ArrowLeft, CheckCircle, Mail, Phone, Globe, Calendar } from 'lucide-react';
 import Link from 'next/link';
+import { PartnershipApplication, PartnershipPageProps, PartnershipType } from '@/app/types/types';
 
-interface PartnershipPageProps {
-  onBack: () => void;
-}
-
-interface PartnershipType {
-  id: string;
-  title: string;
-  description: string;
-  benefits: string[];
-  commitment: string;
-  icon: React.ReactNode;
-  color: string;
-}
-
-interface PartnershipApplication {
-  organizationType: string;
-  organizationName: string;
-  contactPerson: string;
-  title: string;
-  email: string;
-  phone: string;
-  website: string;
-  address: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  organizationSize: string;
-  industry: string;
-  partnershipTypes: string[];
-  previousPartnerships: string;
-  proposedContribution: string;
-  expectedOutcomes: string;
-  timeline: string;
-  budget: string;
-  additionalInfo: string;
-}
 
 const PartnershipPage: React.FC<PartnershipPageProps> = ({ onBack }) => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -256,7 +221,7 @@ const PartnershipPage: React.FC<PartnershipPageProps> = ({ onBack }) => {
                   Select Partnership Types
                 </h2>
                 <p className="text-gray-600 mb-8">
-                  Choose one or more partnership types that align with your organization's goals and capabilities.
+                  Choose one or more partnership types that align with your organization&apos;s goals and capabilities.
                 </p>
                 <div className="grid md:grid-cols-2 gap-6">
                   {partnershipTypes.map((type) => (
@@ -271,7 +236,7 @@ const PartnershipPage: React.FC<PartnershipPageProps> = ({ onBack }) => {
                     >
                       <div className="flex items-center space-x-3 mb-4">
                         <div className={`p-2 rounded-lg ${type.color} text-white`}>
-                          {type.icon}
+                          {type.icon }
                         </div>
                         <h3 className="text-xl font-semibold text-gray-900">
                           {type.title}
