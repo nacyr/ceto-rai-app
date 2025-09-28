@@ -20,7 +20,6 @@ export function Toast({ message, type = 'success', onClose }: ToastProps) {
   )
 }
 
-
 export function SuccessToast({ message, type = 'success', duration = 5000, onClose }: ToastProps) {
   useEffect(() => {
     const timer = setTimeout(() => {
