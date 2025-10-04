@@ -206,7 +206,7 @@ const DonatePage: React.FC<DonatePageProps> = ({ onBack }) => {
               </div>
 
               {/* Donor Information */}
-              <div className="mb-8">
+              {/* <div className="mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Information</h2>
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                   <div>
@@ -271,7 +271,7 @@ const DonatePage: React.FC<DonatePageProps> = ({ onBack }) => {
                     Make this donation anonymous
                   </label>
                 </div>
-              </div>
+              </div> */}
 
               {/* Security Info */}
               <div className="bg-gray-50 p-6 rounded-lg mb-8">
