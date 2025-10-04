@@ -23,8 +23,8 @@ const Header: React.FC<HeaderProps> = ({ navigationItems }) => {
 
   // Account details for contributions - UPDATE THESE WITH YOUR ACTUAL DETAILS
   const accountDetails = [
-    { label: 'Bank Transfer', value: 'Account: 1234567890 | Bank Name | Account Name: Ceto Rai Foundation' },
-    { label: 'Mobile Money', value: '+234 XXX XXX XXXX' },
+    { label: 'Bank Transfer', value: 'Account: 0007536428 | Bank Name: TAJ BANK | Account Name: Ceto Rai Foundation' },
+    { label: 'Mobile Money', value: '+234 803 123 4567' },
     { label: 'International', value: 'IBAN: XX00 0000 0000 0000 0000 00' },
   ];
 
