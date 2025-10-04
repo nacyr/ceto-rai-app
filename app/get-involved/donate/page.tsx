@@ -206,7 +206,7 @@ const DonatePage: React.FC<DonatePageProps> = ({ onBack }) => {
               </div>
 
               {/* Donor Information */}
-              {/* <div className="mb-8">
+              <div className="mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Your Information</h2>
                 <div className="grid md:grid-cols-2 gap-4 mb-4">
                   <div>
@@ -215,7 +215,7 @@ const DonatePage: React.FC<DonatePageProps> = ({ onBack }) => {
                     </label>
                     <input
                       type="text"
-                      required
+                      // required
                       value={donorInfo.firstName}
                       onChange={(e) => setDonorInfo({...donorInfo, firstName: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -227,7 +227,7 @@ const DonatePage: React.FC<DonatePageProps> = ({ onBack }) => {
                     </label>
                     <input
                       type="text"
-                      required
+                      // required
                       value={donorInfo.lastName}
                       onChange={(e) => setDonorInfo({...donorInfo, lastName: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -241,7 +241,7 @@ const DonatePage: React.FC<DonatePageProps> = ({ onBack }) => {
                     </label>
                     <input
                       type="email"
-                      required
+                      // required
                       value={donorInfo.email}
                       onChange={(e) => setDonorInfo({...donorInfo, email: e.target.value})}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -271,7 +271,7 @@ const DonatePage: React.FC<DonatePageProps> = ({ onBack }) => {
                     Make this donation anonymous
                   </label>
                 </div>
-              </div> */}
+              </div>
 
               {/* Security Info */}
               <div className="bg-gray-50 p-6 rounded-lg mb-8">
