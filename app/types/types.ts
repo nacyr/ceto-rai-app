@@ -138,3 +138,12 @@ export interface ExchangeRate {
   rate: number;
   lastUpdated: string;
 }
+
+export interface NavigationItem {
+  name: string;
+  href: string;
+}
+
+export interface HeaderProps {
+  navigationItems: NavigationItem[];
+}
