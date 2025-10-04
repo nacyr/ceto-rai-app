@@ -98,13 +98,14 @@ export const teamMembers: TeamMember[] = [
       name: 'Nasir Armiyau',
       role: 'IT Support Officer',
       email: 'nasir.armiyau@cetorai.org',
-      phone: '+234 809 456 7890',
+      phone: '+234 706-294-6809',
       location: 'Abuja, Nigeria',
       joinDate: 'September 2020',
-      image: '', 
+      image: '/images/team/nasir.jpeg', 
       bio: 'Nasir Armiyau is our technology specialist, responsible for maintaining and advancing our digital infrastructure. His expertise in information systems and data management has been crucial in modernizing our operations and improving our ability to track and measure impact. He also leads our digital outreach initiatives.',
       education: [
-        'B.Sc. in Computer Science, University of Abuja',
+        'MSc. in Computer Science, Taraba State University, Taraba',
+        'B.Sc. in Computer Science, Bayero university, Kano',
         'Professional Certificate in Network Administration',
         'Certification in Database Management Systems'
       ],
