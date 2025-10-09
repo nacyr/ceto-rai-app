@@ -16,6 +16,12 @@ export const HomePage: React.FC = () => {
             }}
           />
         </div>
+{/* Flexible Schedule
+Work around your schedule with flexible volunteer opportunities
+
+Make an Impact
+See the direct impact of your volunteer work in communities */}
+
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
           <div className="max-w-3xl">

@@ -111,13 +111,13 @@ const Header: React.FC<HeaderProps> = ({ navigationItems }) => {
               </div>
             ) : (
               <div className="flex items-center space-x-3">
-                <Link
+                {/** <Link
                   href="/login"
                   className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-teal-600 transition-colors duration-300 font-medium"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>Sign In</span>
-                </Link>
+                </Link> **/}
                 <Link
                   href="/login"
                   className="flex items-center space-x-2 px-6 py-2 bg-gradient-to-r from-teal-500 to-blue-600 text-white rounded-lg hover:from-teal-600 hover:to-blue-700 transition-all duration-300 shadow-md hover:shadow-lg font-medium"
