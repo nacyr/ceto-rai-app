@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Menu, X, Heart, User, LogIn, LogOut, CreditCard } from 'lucide-react';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/app/contexts/AuthContext';
 import Link from 'next/link';
@@ -58,8 +59,14 @@ const Header: React.FC<HeaderProps> = ({ navigationItems }) => {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-12 h-12 bg-gradient-to-br from-teal-500 via-cyan-500 to-blue-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
-              <Heart className="w-6 h-6 text-white" />
+            <div className="w-12 h-12 rounded-full overflow-hidden group-hover:scale-110 transition-transform duration-300 shadow-lg">
+              <Image 
+                src="/images/logo/ceto_rai_logo.jpg" 
+                alt="Ceto Rai Logo" 
+                width={48} 
+                height={48} 
+                className="w-full h-full object-cover"
+              />
             </div>
             <div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
@@ -95,6 +102,13 @@ const Header: React.FC<HeaderProps> = ({ navigationItems }) => {
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link
+                  href="/get-involved/donate"
+                  className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg hover:from-red-600 hover:to-pink-700 transition-all duration-300 shadow-md hover:shadow-lg font-medium"
+                >
+                  <Heart className="w-4 h-4" />
+                  <span className="text-sm font-medium">Donate</span>
+                </Link>
+                <Link
                   href="/dashboard"
                   className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-blue-600 text-white rounded-lg hover:from-teal-600 hover:to-blue-700 transition-all duration-300 shadow-md hover:shadow-lg"
                 >
@@ -111,6 +125,13 @@ const Header: React.FC<HeaderProps> = ({ navigationItems }) => {
               </div>
             ) : (
               <div className="flex items-center space-x-3">
+                <Link
+                  href="/get-involved/donate"
+                  className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg hover:from-red-600 hover:to-pink-700 transition-all duration-300 shadow-md hover:shadow-lg font-medium"
+                >
+                  <Heart className="w-4 h-4" />
+                  <span className="text-sm font-medium">Donate</span>
+                </Link>
                 {/** <Link
                   href="/login"
                   className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-teal-600 transition-colors duration-300 font-medium"
@@ -158,6 +179,13 @@ const Header: React.FC<HeaderProps> = ({ navigationItems }) => {
               {user ? (
                 <div className="space-y-3 pt-3 border-t border-gray-100">
                   <Link
+                    href="/get-involved/donate"
+                    className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg hover:from-red-600 hover:to-pink-700 transition-all duration-300"
+                  >
+                    <Heart className="w-4 h-4" />
+                    <span>Donate</span>
+                  </Link>
+                  <Link
                     href="/dashboard"
                     className="flex items-center space-x-2 px-3 py-2 text-teal-600 hover:bg-teal-50 rounded-lg transition-colors duration-300"
                   >
@@ -174,6 +202,13 @@ const Header: React.FC<HeaderProps> = ({ navigationItems }) => {
                 </div>
               ) : (
                 <div className="space-y-3 pt-3 border-t border-gray-100">
+                  <Link
+                    href="/get-involved/donate"
+                    className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-red-500 to-pink-600 text-white rounded-lg hover:from-red-600 hover:to-pink-700 transition-all duration-300"
+                  >
+                    <Heart className="w-4 h-4" />
+                    <span>Donate</span>
+                  </Link>
                   <Link
                     href="/login"
                     className="flex items-center space-x-2 px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg transition-colors duration-300"

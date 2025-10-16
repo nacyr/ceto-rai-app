@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 interface NavigationItem {
@@ -21,8 +22,14 @@ const Footer: React.FC<FooterProps> = ({ navigationItems }) => {
           {/* Logo + About */}
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-700 rounded-full flex items-center justify-center">
-                <Heart className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-full overflow-hidden">
+                <Image 
+                  src="/images/logo/ceto_rai_logo.jpg" 
+                  alt="Ceto Rai Logo" 
+                  width={48} 
+                  height={48} 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <h3 className="text-xl font-bold">Ceto Rai</h3>
@@ -34,10 +41,38 @@ const Footer: React.FC<FooterProps> = ({ navigationItems }) => {
               community development programs across education, healthcare, and empowerment.
             </p>
             <div className="flex space-x-4">
-              <Facebook className="w-6 h-6 text-gray-400 hover:text-teal-400 cursor-pointer transition-colors" />
-              <Twitter className="w-6 h-6 text-gray-400 hover:text-teal-400 cursor-pointer transition-colors" />
-              <Instagram className="w-6 h-6 text-gray-400 hover:text-teal-400 cursor-pointer transition-colors" />
-              <Linkedin className="w-6 h-6 text-gray-400 hover:text-teal-400 cursor-pointer transition-colors" />
+              <a 
+                href="https://www.facebook.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-teal-400 transition-colors"
+              >
+                <Facebook className="w-6 h-6" />
+              </a>
+              <a 
+                href="https://x.com/Ceto_Rai?t=eEIQuBs2EOb_-3pDucBYZw&s=09" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-teal-400 transition-colors"
+              >
+                <Twitter className="w-6 h-6" />
+              </a>
+              <a 
+                href="https://www.instagram.com/ceto_rai?igsh=ZWg2d29kNGtmYmJt" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-teal-400 transition-colors"
+              >
+                <Instagram className="w-6 h-6" />
+              </a>
+              <a 
+                href="https://www.linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-teal-400 transition-colors"
+              >
+                <Linkedin className="w-6 h-6" />
+              </a>
             </div>
           </div>
 

@@ -9,7 +9,8 @@ export function VolunteerApplication() {
     availability: '',
     interests: [] as string[],
     experience: '',
-    motivation: ''
+    motivation: '',
+    gender: ''
   });
 
   const availabilityOptions = [
@@ -103,6 +104,34 @@ export function VolunteerApplication() {
               <span className="ml-2">{program}</span>
             </label>
           ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-medium text-gray-900">Gender</h3>
+        <div className="mt-2 space-y-2">
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="gender"
+              value="Male"
+              checked={formData.gender === 'Male'}
+              onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+              className="border-gray-300 text-teal-600 focus:ring-teal-500"
+            />
+            <span className="ml-2">Male</span>
+          </label>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              name="gender"
+              value="Female"
+              checked={formData.gender === 'Female'}
+              onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+              className="border-gray-300 text-teal-600 focus:ring-teal-500"
+            />
+            <span className="ml-2">Female</span>
+          </label>
         </div>
       </div>
 

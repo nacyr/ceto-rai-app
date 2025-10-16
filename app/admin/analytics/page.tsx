@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/app/contexts/AuthContext'
 import { useRouter } from 'next/navigation'
+import AdminProtectedRoute from '@/app/components/AdminProtectedRoute'
 import { BarChart3, TrendingUp, Users, DollarSign, Activity } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
 
@@ -19,11 +20,10 @@ export default function AdminAnalyticsPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!user || user.user_metadata?.role !== 'admin') {
-      router.push('/login')
-      return
+    // Remove the manual admin check since AdminProtectedRoute handles it
+    if (user) {
+      fetchAnalytics()
     }
-    fetchAnalytics()
   }, [user, router])
 
   const fetchAnalytics = async () => {
@@ -59,79 +59,99 @@ export default function AdminAnalyticsPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Analytics Dashboard</h1>
-        <p className="text-muted-foreground">Detailed insights and metrics</p>
-      </div>
+    <AdminProtectedRoute>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Analytics</h1>
+          <p className="text-muted-foreground">Detailed insights into your foundation's performance</p>
+        </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
-          <CardHeader>
-            <CardTitle>Total Programs</CardTitle>
-            <CardDescription>Active donation programs</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{analytics.donationsByProgram.length}</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Volunteer Skills</CardTitle>
-            <CardDescription>Unique skills registered</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{analytics.volunteersBySkills.length}</div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Monthly Growth</CardTitle>
-            <CardDescription>Donation trend</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+{analytics.monthlyStats.length}%</div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Donations by Program</CardTitle>
-            <CardDescription>Distribution across programs</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {analytics.donationsByProgram.map((item: any, index: number) => (
-                <div key={index} className="flex justify-between">
-                  <span>{item.program}</span>
-                  <span className="font-medium">${item.total}</span>
+        {loading ? (
+          <div className="grid gap-4 md:grid-cols-2">
+            {[1, 2, 3, 4].map((i) => (
+              <Card key={i} className="animate-pulse">
+                <CardHeader>
+                  <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                  <div className="h-3 bg-gray-300 rounded w-1/2"></div>
+                </CardHeader>
+                <CardContent>
+                  <div className="h-32 bg-gray-300 rounded"></div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle>Donations by Program</CardTitle>
+                <CardDescription>Distribution of donations across programs</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  {analytics.donationsByProgram.map((item: any, index: number) => (
+                    <div key={index} className="flex justify-between">
+                      <span>{item.program}</span>
+                      <span className="font-medium">₦{item.amount.toLocaleString()}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Volunteer Status</CardTitle>
-            <CardDescription>Current volunteer distribution</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {analytics.volunteersByStatus.map((item: any, index: number) => (
-                <div key={index} className="flex justify-between">
-                  <span>{item.status}</span>
-                  <span className="font-medium">{item.count}</span>
+            <Card>
+              <CardHeader>
+                <CardTitle>Volunteers by Skills</CardTitle>
+                <CardDescription>Volunteer distribution by skill set</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  {analytics.volunteersBySkills.map((item: any, index: number) => (
+                    <div key={index} className="flex justify-between">
+                      <span>{item.skill}</span>
+                      <span className="font-medium">{item.count}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Donations Trend</CardTitle>
+                <CardDescription>Monthly donation trends</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  {analytics.donationsTrend.map((item: any, index: number) => (
+                    <div key={index} className="flex justify-between">
+                      <span>{item.month}</span>
+                      <span className="font-medium">₦{item.amount.toLocaleString()}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Volunteer Status</CardTitle>
+                <CardDescription>Current volunteer distribution</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  {analytics.volunteersByStatus.map((item: any, index: number) => (
+                    <div key={index} className="flex justify-between">
+                      <span>{item.status}</span>
+                      <span className="font-medium">{item.count}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
-    </div>
+    </AdminProtectedRoute>
   )
 }

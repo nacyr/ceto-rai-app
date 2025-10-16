@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/app/contexts/AuthContext'
 import { useRouter } from 'next/navigation'
+import AdminProtectedRoute from '@/app/components/AdminProtectedRoute'
 import { 
   Users, 
   Heart, 
@@ -41,11 +42,10 @@ export default function AdminDashboardPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!user || user.user_metadata?.role !== 'admin') {
-      router.push('/login')
-      return
+    // Remove the manual admin check since AdminProtectedRoute handles it
+    if (user) {
+      fetchAdminData()
     }
-    fetchAdminData()
   }, [user, router])
 
   const fetchAdminData = async () => {
@@ -95,99 +95,101 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
-          <p className="text-muted-foreground">Welcome to the Ceto Rai administration panel</p>
+    <AdminProtectedRoute>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
+            <p className="text-muted-foreground">Welcome to the Ceto Rai administration panel</p>
+          </div>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <Button 
+            variant="outline" 
+            className="h-auto py-4"
+            onClick={() => router.push('/admin/donations')}
+          >
+            <Heart className="mr-2 h-4 w-4" />
+            Manage Donations
+          </Button>
+          <Button 
+            variant="outline" 
+            className="h-auto py-4"
+            onClick={() => router.push('/admin/volunteers')}
+          >
+            <Users className="mr-2 h-4 w-4" />
+            Manage Volunteers
+          </Button>
+          <Button 
+            variant="outline" 
+            className="h-auto py-4"
+            onClick={() => router.push('/admin/analytics')}
+          >
+            <BarChart3 className="mr-2 h-4 w-4" />
+            View Analytics
+          </Button>
+          <Button 
+            variant="outline" 
+            className="h-auto py-4"
+            onClick={() => router.push('/reports')}
+          >
+            <Activity className="mr-2 h-4 w-4" />
+            Generate Reports
+          </Button>
+        </div>
+
+        {/* Stats Overview */}
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          <StatCard
+            title="Total Donations"
+            value={`$${stats.totalAmount.toLocaleString()}`}
+            description="All donations received"
+            icon={DollarSign}
+            color="bg-green-500"
+          />
+          <StatCard
+            title="Total Volunteers"
+            value={stats.totalVolunteers.toString()}
+            description="Active volunteers"
+            icon={Users}
+            color="bg-blue-500"
+          />
+          <StatCard
+            title="Pending Donations"
+            value={stats.pendingDonations.toString()}
+            description="Awaiting approval"
+            icon={Clock}
+            color="bg-yellow-500"
+          />
+          <StatCard
+            title="Pending Volunteers"
+            value={stats.pendingVolunteers.toString()}
+            description="Applications to review"
+            icon={Award}
+            color="bg-purple-500"
+          />
+        </div>
+
+        {/* Additional Stats */}
+        <div className="grid gap-4 md:grid-cols-2">
+          <StatCard
+            title="Total Users"
+            value={stats.totalUsers.toString()}
+            description="Registered users"
+            icon={TrendingUp}
+            color="bg-indigo-500"
+          />
+          <StatCard
+            title="Total Donations"
+            value={stats.totalDonations.toString()}
+            description="Individual donations"
+            icon={Heart}
+            color="bg-red-500"
+          />
         </div>
       </div>
-
-      {/* Quick Actions */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Button 
-          variant="outline" 
-          className="h-auto py-4"
-          onClick={() => router.push('/admin/donations')}
-        >
-          <Heart className="mr-2 h-4 w-4" />
-          Manage Donations
-        </Button>
-        <Button 
-          variant="outline" 
-          className="h-auto py-4"
-          onClick={() => router.push('/admin/volunteers')}
-        >
-          <Users className="mr-2 h-4 w-4" />
-          Manage Volunteers
-        </Button>
-        <Button 
-          variant="outline" 
-          className="h-auto py-4"
-          onClick={() => router.push('/admin/analytics')}
-        >
-          <BarChart3 className="mr-2 h-4 w-4" />
-          View Analytics
-        </Button>
-        <Button 
-          variant="outline" 
-          className="h-auto py-4"
-          onClick={() => router.push('/reports')}
-        >
-          <Activity className="mr-2 h-4 w-4" />
-          Generate Reports
-        </Button>
-      </div>
-
-      {/* Stats Overview */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <StatCard
-          title="Total Donations"
-          value={`$${stats.totalAmount.toLocaleString()}`}
-          description="All donations received"
-          icon={DollarSign}
-          color="bg-green-500"
-        />
-        <StatCard
-          title="Total Volunteers"
-          value={stats.totalVolunteers.toString()}
-          description="Active volunteers"
-          icon={Users}
-          color="bg-blue-500"
-        />
-        <StatCard
-          title="Pending Donations"
-          value={stats.pendingDonations.toString()}
-          description="Awaiting approval"
-          icon={Clock}
-          color="bg-yellow-500"
-        />
-        <StatCard
-          title="Pending Volunteers"
-          value={stats.pendingVolunteers.toString()}
-          description="Applications to review"
-          icon={Award}
-          color="bg-purple-500"
-        />
-      </div>
-
-      {/* Additional Stats */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <StatCard
-          title="Total Users"
-          value={stats.totalUsers.toString()}
-          description="Registered users"
-          icon={TrendingUp}
-          color="bg-indigo-500"
-        />
-        <StatCard
-          title="Total Donations"
-          value={stats.totalDonations.toString()}
-          description="Individual donations"
-          icon={Heart}
-          color="bg-red-500"
-        />
-      </div>
-    </div>
+    </AdminProtectedRoute>
   )
 }
