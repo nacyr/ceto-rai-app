@@ -8,11 +8,6 @@ import { useAuth } from '@/app/contexts/AuthContext';
 import Link from 'next/link';
 import { HeaderProps } from '../types/types';
 
-interface NavigationItem {
-  name: string;
-  href: string;
-}
-
 const Header: React.FC<HeaderProps> = ({ navigationItems }) => {
   const pathname = usePathname();
   const { user, signOut } = useAuth();

@@ -1,3 +1,4 @@
+
 'use client'
 
 import Link from "next/link";
@@ -13,16 +14,12 @@ export const HomePage: React.FC = () => {
             className="w-full h-full bg-cover bg-center"
             style={{
               backgroundImage: `linear-gradient(135deg, #0d9488 0%, #0f766e 100%)`
+              // backgroundImage: "url('/images/bgimage.png')"
             }}
           />
         </div>
-{/* Flexible Schedule
-Work around your schedule with flexible volunteer opportunities
 
-Make an Impact
-See the direct impact of your volunteer work in communities */}
-
-
+        {/* Make an Impact: See the direct impact of your volunteer work in communities */}
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -51,6 +48,7 @@ See the direct impact of your volunteer work in communities */}
         </div>
       </section>
 
+      {/* IMPACT SECTION with BACKGROUND IMAGE */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">

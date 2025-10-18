@@ -34,9 +34,8 @@ export const teamMembers: TeamMember[] = [
       image: '/images/team/adamu.jpeg', 
       bio: 'Muhammad A. Adamu is a visionary leader with over 15 years of experience in humanitarian work and community development. He founded Ceto Rai with the mission to create sustainable change in underserved communities. Under his leadership, the foundation has grown from a small local initiative to a recognized humanitarian organization serving thousands across West Africa.',
       education: [
-        'Ph.D. in Development Studies, University of London',
-        'M.A. in International Relations, Ahmadu Bello University',
-        'B.Sc. in Political Science, University of Abuja'
+        'M.Sc. in Accounting and Financial Management Bayero University, Kano',
+        'B.Sc. in Accounting, Taraba State University Jalingo'
       ],
       achievements: [
         'Founded Ceto Rai Humanitarian Foundation',

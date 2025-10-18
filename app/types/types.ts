@@ -147,3 +147,7 @@ export interface NavigationItem {
 export interface HeaderProps {
   navigationItems: NavigationItem[];
 }
+
+export interface FooterProps {
+  navigationItems: NavigationItem[];
+}

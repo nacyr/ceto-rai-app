@@ -3,18 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import {Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { FooterProps } from '../types/types';
 
-interface NavigationItem {
-  name: string;
-  href: string;
-}
-
-interface FooterProps {
-  navigationItems: NavigationItem[];
-}
 
 const Footer: React.FC<FooterProps> = ({ navigationItems }) => {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-gray-900 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,7 +37,7 @@ const Footer: React.FC<FooterProps> = ({ navigationItems }) => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="https://www.facebook.com" 
+                href="Facebook: https://www.facebook.com/share/17KWrzzPno/?mibextid=wwXIfr" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-teal-400 transition-colors"
@@ -98,15 +93,21 @@ const Footer: React.FC<FooterProps> = ({ navigationItems }) => {
             <div className="space-y-4">
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-teal-400" />
-                <span className="text-gray-300">info@cetorai.org</span>
+                {/* <span className="text-gray-300" href="mailto:info@cetorai.org">info@cetorai.org</span> */}
+                <a
+                  href="mailto:cetoraifoundation@gmail.com"
+                  className="text-gray-300 hover:text-teal-400 transition-colors"
+                >
+                  cetoraifoundation@gmail.com
+                </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-teal-400" />
-                <span className="text-gray-300">+234 800 123 4567</span>
+                <span className="text-gray-300">+234 708-536-7549</span>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-teal-400 mt-1" />
-                <span className="text-gray-300">Lagos, Nigeria</span>
+                <span className="text-gray-300">Taraba State, Nigeria</span>
               </div>
             </div>
           </div>
@@ -115,7 +116,7 @@ const Footer: React.FC<FooterProps> = ({ navigationItems }) => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-700 mt-12 pt-8 text-center">
           <p className="text-gray-400">
-            © 2025 Ceto Rai Humanitarian Foundation. All rights reserved.
+            © {currentYear} Ceto Rai Humanitarian Foundation. All rights reserved.
           </p>
         </div>
       </div>
