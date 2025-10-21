@@ -172,12 +172,15 @@ export interface HomeContent {
   };
 }
 
-export interface AboutContent {
-  section: string;
-  title: string;
-  subtitle?: string;
-  paragraphs?: string[];
-  image_url?: string;
-  background_color?: string;
-  background_image?: string;
+export interface AboutData {
+  hero: {
+    title: string
+    subtitle: string
+    backgroundImage: string
+  }
+  story: {
+    title: string
+    paragraphs: string[]
+  }
+  values: ValueCard[]
 }
