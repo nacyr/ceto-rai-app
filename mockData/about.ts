@@ -8,7 +8,7 @@ export const values: ValueCard[] = [
     description:
       "To uplift vulnerable communities through sustainable programs in education, healthcare, empowerment, and humanitarian aid.",
   },
-  {
+  { 
     icon: Eye,
     title: "Our Vision",
     description:

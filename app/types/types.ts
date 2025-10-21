@@ -171,3 +171,13 @@ export interface HomeContent {
     secondaryButton: { text: string; link: string };
   };
 }
+
+export interface AboutContent {
+  section: string;
+  title: string;
+  subtitle?: string;
+  paragraphs?: string[];
+  image_url?: string;
+  background_color?: string;
+  background_image?: string;
+}

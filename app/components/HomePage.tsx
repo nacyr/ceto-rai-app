@@ -101,7 +101,7 @@ export const HomePage: React.FC = () => {
           setImpactStats(formattedStats);
         }
       } catch (error) {
-        console.error("Error loading homepage data:", error);
+        console.log("Error loading homepage data:", error);
       } finally {
         setLoading(false);
       }
