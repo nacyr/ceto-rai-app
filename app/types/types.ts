@@ -151,3 +151,23 @@ export interface HeaderProps {
 export interface FooterProps {
   navigationItems: NavigationItem[];
 }
+
+
+export interface HomeContent {
+  hero: {
+    title: string;
+    subtitle: string;
+    primaryButton: { text: string; link: string };
+    secondaryButton: { text: string; link: string };
+  };
+  impact: {
+    title: string;
+    subtitle: string;
+  };
+  cta: {
+    title: string;
+    subtitle: string;
+    primaryButton: { text: string; link: string };
+    secondaryButton: { text: string; link: string };
+  };
+}
