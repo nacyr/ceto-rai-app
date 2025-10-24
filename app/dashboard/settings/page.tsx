@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '@/app/contexts/AuthContext'
 import { supabase } from '@/app/lib/supabase'
 import { 
@@ -8,53 +8,23 @@ import {
   Bell, 
   Shield, 
   CreditCard, 
-  Globe, 
+  // Globe, 
   Eye, 
   EyeOff,
   Save,
   Trash2,
   Download,
-  Upload,
+  // Upload,
   AlertTriangle,
   Check,
   X
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Button } from '@/app/components/ui/button'
-import { Badge } from '@/app/components/ui/badge'
+// import { Badge } from '@/app/components/ui/badge'
 import { toast } from 'react-hot-toast'
+import { NotificationSettings, PrivacySettings, UserSettings } from '@/app/types/admin/types'
 
-interface UserSettings {
-  fullName: string
-  email: string
-  phone: string
-  address: string
-  city: string
-  country: string
-  timezone: string
-  language: string
-  currency: string
-}
-
-interface NotificationSettings {
-  emailDonationReceipts: boolean
-  emailVolunteerUpdates: boolean
-  emailImpactReports: boolean
-  emailNewsletter: boolean
-  smsReminders: boolean
-  pushNotifications: boolean
-  weeklyDigest: boolean
-  monthlyReport: boolean
-}
-
-interface PrivacySettings {
-  profileVisibility: 'public' | 'private' | 'donors-only'
-  showDonationHistory: boolean
-  showVolunteerActivity: boolean
-  allowDataExport: boolean
-  marketingEmails: boolean
-  thirdPartySharing: boolean
-}
 
 export default function SettingsPage() {
   const { user, signOut } = useAuth()
@@ -63,7 +33,7 @@ export default function SettingsPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
-  // Settings state
+  // --- state declarations (same as yours) ---
   const [userSettings, setUserSettings] = useState<UserSettings>({
     fullName: '',
     email: '',
@@ -102,17 +72,11 @@ export default function SettingsPage() {
     confirmPassword: ''
   })
 
-  useEffect(() => {
-    if (user) {
-      loadUserSettings()
-    }
-  }, [user])
-
-  const loadUserSettings = async () => {
+  // ✅ FIX HERE: wrap loadUserSettings in useCallback
+  const loadUserSettings = useCallback(async () => {
     try {
       setLoading(true)
-      
-      // Load user profile data
+
       const { data: profile } = await supabase
         .from('profiles')
         .select('*')
@@ -132,17 +96,110 @@ export default function SettingsPage() {
           currency: profile.currency || 'USD'
         })
       }
-
-      // Load notification settings (mock data for now)
-      // In a real app, these would be stored in the database
-      
     } catch (error) {
       console.error('Error loading settings:', error)
       toast.error('Failed to load settings')
     } finally {
       setLoading(false)
     }
-  }
+  }, [user?.id, user?.email]) // 👈 include dependencies you use inside
+
+  // ✅ Include it here safely
+  useEffect(() => {
+    if (user) {
+      loadUserSettings()
+    }
+  }, [user, loadUserSettings])
+
+// export default function SettingsPage() {
+//   const { user, signOut } = useAuth()
+//   const [activeTab, setActiveTab] = useState('profile')
+//   const [loading, setLoading] = useState(false)
+//   const [showPassword, setShowPassword] = useState(false)
+//   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+
+//   // Settings state
+//   const [userSettings, setUserSettings] = useState<UserSettings>({
+//     fullName: '',
+//     email: '',
+//     phone: '',
+//     address: '',
+//     city: '',
+//     country: '',
+//     timezone: 'UTC',
+//     language: 'en',
+//     currency: 'USD'
+//   })
+
+//   const [notificationSettings, setNotificationSettings] = useState<NotificationSettings>({
+//     emailDonationReceipts: true,
+//     emailVolunteerUpdates: true,
+//     emailImpactReports: true,
+//     emailNewsletter: false,
+//     smsReminders: false,
+//     pushNotifications: true,
+//     weeklyDigest: true,
+//     monthlyReport: true
+//   })
+
+//   const [privacySettings, setPrivacySettings] = useState<PrivacySettings>({
+//     profileVisibility: 'private',
+//     showDonationHistory: false,
+//     showVolunteerActivity: true,
+//     allowDataExport: true,
+//     marketingEmails: false,
+//     thirdPartySharing: false
+//   })
+
+//   const [passwordData, setPasswordData] = useState({
+//     currentPassword: '',
+//     newPassword: '',
+//     confirmPassword: ''
+//   })
+
+//   // useEffect(() => {
+//   //   if (user) {
+//   //     loadUserSettings()
+//   //   }
+//   // }, [user])
+
+//   const loadUserSettings = async () => {
+//     try {
+//       setLoading(true)
+      
+//       // Load user profile data
+//       const { data: profile } = await supabase
+//         .from('profiles')
+//         .select('*')
+//         .eq('id', user?.id)
+//         .single()
+
+//       if (profile) {
+//         setUserSettings({
+//           fullName: profile.full_name || '',
+//           email: user?.email || '',
+//           phone: profile.phone || '',
+//           address: profile.address || '',
+//           city: profile.city || '',
+//           country: profile.country || '',
+//           timezone: profile.timezone || 'UTC',
+//           language: profile.language || 'en',
+//           currency: profile.currency || 'USD'
+//         })
+//       }
+
+//       // Load notification settings (mock data for now)
+//       // In a real app, these would be stored in the database
+      
+//     } catch (error) {
+//       console.error('Error loading settings:', error)
+//       toast.error('Failed to load settings')
+//     } finally {
+//       setLoading(false)
+//     }
+//   }
+
+  
 
   const saveProfileSettings = async () => {
     try {
@@ -819,7 +876,7 @@ export default function SettingsPage() {
                 ) : (
                   <div className="space-y-4">
                     <p className="text-sm text-gray-600">
-                      Are you absolutely sure? This action cannot be undone. Type "DELETE" to confirm:
+                      Are you absolutely sure? This action cannot be undone. Type &quot;DELETE&quot; to confirm:
                     </p>
                     <div className="flex space-x-3">
                       <Button

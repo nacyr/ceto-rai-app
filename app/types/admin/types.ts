@@ -44,3 +44,36 @@ export interface Donation {
   program: ProgramType
   amount: number
 }
+
+
+export interface UserSettings {
+  fullName: string
+  email: string
+  phone: string
+  address: string
+  city: string
+  country: string
+  timezone: string
+  language: string
+  currency: string
+}
+
+export interface NotificationSettings {
+  emailDonationReceipts: boolean
+  emailVolunteerUpdates: boolean
+  emailImpactReports: boolean
+  emailNewsletter: boolean
+  smsReminders: boolean
+  pushNotifications: boolean
+  weeklyDigest: boolean
+  monthlyReport: boolean
+}
+
+export interface PrivacySettings {
+  profileVisibility: 'public' | 'private' | 'donors-only'
+  showDonationHistory: boolean
+  showVolunteerActivity: boolean
+  allowDataExport: boolean
+  marketingEmails: boolean
+  thirdPartySharing: boolean
+}
