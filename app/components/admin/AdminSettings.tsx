@@ -7,69 +7,25 @@ import {
   Save, 
   RefreshCw, 
   Shield, 
-  Mail, 
+  // Mail, 
   Globe, 
   Database,
   Users,
   DollarSign,
   Bell,
-  Eye,
-  EyeOff,
+  // Eye,
+  // EyeOff,
   Check,
-  X,
+  // X,
   AlertTriangle
 } from 'lucide-react'
 import { Button } from '@/app/components/ui/button'
 import { Input } from '@/app/components/ui/input'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Badge } from '@/app/components/ui/badge'
 import { Switch } from '@/app/components/ui/switch'
+import { SystemSettings, SystemStats } from '@/app/types/admin/types'
 
-interface SystemSettings {
-  // General Settings
-  site_name: string
-  site_description: string
-  contact_email: string
-  support_email: string
-  
-  // Security Settings
-  require_email_verification: boolean
-  enable_two_factor: boolean
-  session_timeout: number
-  max_login_attempts: number
-  
-  // Donation Settings
-  min_donation_amount: number
-  max_donation_amount: number
-  default_currency: string
-  enable_recurring_donations: boolean
-  
-  // Volunteer Settings
-  auto_approve_volunteers: boolean
-  require_background_check: boolean
-  volunteer_application_limit: number
-  
-  // Notification Settings
-  email_notifications: boolean
-  sms_notifications: boolean
-  push_notifications: boolean
-  notification_frequency: string
-  
-  // System Settings
-  maintenance_mode: boolean
-  debug_mode: boolean
-  api_rate_limit: number
-  backup_frequency: string
-}
-
-interface SystemStats {
-  total_users: number
-  total_donations: number
-  total_volunteers: number
-  system_uptime: string
-  database_size: string
-  last_backup: string
-}
 
 export function AdminSettings() {
   const [settings, setSettings] = useState<SystemSettings>({
@@ -109,7 +65,7 @@ export function AdminSettings() {
 
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
-  const [showApiKey, setShowApiKey] = useState(false)
+  // const [showApiKey, setShowApiKey] = useState(false)
   const [activeTab, setActiveTab] = useState('general')
 
   useEffect(() => {

@@ -96,3 +96,50 @@ export interface QuickActionProps {
   color: string
   badge?: string
 }
+
+
+export interface SystemSettings {
+  // General Settings
+  site_name: string
+  site_description: string
+  contact_email: string
+  support_email: string
+  
+  // Security Settings
+  require_email_verification: boolean
+  enable_two_factor: boolean
+  session_timeout: number
+  max_login_attempts: number
+  
+  // Donation Settings
+  min_donation_amount: number
+  max_donation_amount: number
+  default_currency: string
+  enable_recurring_donations: boolean
+  
+  // Volunteer Settings
+  auto_approve_volunteers: boolean
+  require_background_check: boolean
+  volunteer_application_limit: number
+  
+  // Notification Settings
+  email_notifications: boolean
+  sms_notifications: boolean
+  push_notifications: boolean
+  notification_frequency: string
+  
+  // System Settings
+  maintenance_mode: boolean
+  debug_mode: boolean
+  api_rate_limit: number
+  backup_frequency: string
+}
+
+export interface SystemStats {
+  total_users: number
+  total_donations: number
+  total_volunteers: number
+  system_uptime: string
+  database_size: string
+  last_backup: string
+}
