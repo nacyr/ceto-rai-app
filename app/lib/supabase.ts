@@ -1,30 +1,59 @@
-//original code
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+// Get env vars
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// Validate environment variables
+// Runtime validation (so your app fails gracefully if vars are missing)
 if (!supabaseUrl) {
-  throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable')
+  throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable');
 }
 
 if (!supabaseAnonKey) {
-  throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable')
+  throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+// Now TS knows they're not undefined (due to runtime guards)
+export const supabase = createClient(supabaseUrl as string, supabaseAnonKey as string, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
-    detectSessionInUrl: true
+    detectSessionInUrl: true,
   },
   global: {
     headers: {
-      'X-Client-Info': 'ceto-rai-app'
-    }
-  }
-})
+      'X-Client-Info': 'save-life-foundation-app',
+    },
+  },
+});
+
+// //original code
+// import { createClient } from '@supabase/supabase-js'
+
+// const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+// const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+
+// // Validate environment variables
+// if (!supabaseUrl) {
+//   throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL environment variable')
+// }
+
+// if (!supabaseAnonKey) {
+//   throw new Error('Missing NEXT_PUBLIC_SUPABASE_ANON_KEY environment variable')
+// }
+
+// export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+//   auth: {
+//     autoRefreshToken: true,
+//     persistSession: true,
+//     detectSessionInUrl: true
+//   },
+//   global: {
+//     headers: {
+//       'X-Client-Info': 'ceto-rai-app'
+//     }
+//   }
+// })
 
 
 // import { createClient, SupabaseClient } from '@supabase/supabase-js'
