@@ -143,3 +143,62 @@ export interface SystemStats {
   database_size: string
   last_backup: string
 }
+
+export interface MonthlyTrend {
+  month: string
+  total: number
+  donations?: number
+  volunteers?: number
+  users?: number
+}
+
+export interface AdminStats {
+  totalDonations: number
+  totalAmount: number
+  totalVolunteers: number
+  totalUsers: number
+  pendingDonations: number
+  pendingVolunteers: number
+  monthlyTrend: MonthlyTrend[]
+}
+
+// export interface ExportOptions {
+//   format: 'csv' | 'json' | 'xlsx'
+//   dateRange: {
+//     start: string
+//     end: string
+//   }
+//   filters: {
+//     status?: string
+//     program?: string
+//     skills?: string[]
+//   }
+//   includeFields: string[]
+// }
+export interface ExportOptions {
+  format: 'csv' | 'json' | 'xlsx'
+  dateRange: {
+    start: string
+    end: string
+  }
+  filters: {
+    status?: string
+    program?: string
+    skills?: string[]
+    [key: string]: string | number | string[] | undefined // // <-- 👈 add this line
+  }
+  includeFields: string[]
+}
+
+
+export interface ExportJob {
+  id: string
+  type: 'donations' | 'volunteers' | 'users'
+  status: 'pending' | 'processing' | 'completed' | 'failed'
+  progress: number
+  createdAt: Date
+  completedAt?: Date
+  downloadUrl?: string
+  recordCount?: number
+  error?: string
+}

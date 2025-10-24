@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
 import { useState } from 'react'
@@ -5,8 +6,8 @@ import { supabase } from '@/app/lib/supabase'
 import { 
   Download, 
   FileText, 
-  Calendar, 
-  Filter, 
+  // Calendar, 
+  // Filter, 
   Users, 
   DollarSign, 
   UserCheck,
@@ -20,32 +21,8 @@ import { Button } from '@/app/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Badge } from '@/app/components/ui/badge'
 import { Input } from '@/app/components/ui/input'
+import { ExportJob, ExportOptions } from '@/app/types/admin/types'
 
-interface ExportOptions {
-  format: 'csv' | 'json' | 'xlsx'
-  dateRange: {
-    start: string
-    end: string
-  }
-  filters: {
-    status?: string
-    program?: string
-    skills?: string[]
-  }
-  includeFields: string[]
-}
-
-interface ExportJob {
-  id: string
-  type: 'donations' | 'volunteers' | 'users'
-  status: 'pending' | 'processing' | 'completed' | 'failed'
-  progress: number
-  createdAt: Date
-  completedAt?: Date
-  downloadUrl?: string
-  recordCount?: number
-  error?: string
-}
 
 export function ExportManager() {
   const [activeTab, setActiveTab] = useState<'donations' | 'volunteers' | 'users'>('donations')
@@ -142,7 +119,8 @@ export function ExportManager() {
     }))
   }
 
-  const handleFilterChange = (filterId: string, value: any) => {
+  // const handleFilterChange = (filterId: string, value: any) => {
+  const handleFilterChange = (filterId: string, value: string | number | string[]) => {
     setExportOptions(prev => ({
       ...prev,
       filters: {
@@ -153,7 +131,7 @@ export function ExportManager() {
   }
 
   const generateExportData = async (type: string) => {
-    let query = supabase.from(type)
+    let query = supabase.from(type) as any
 
     // Apply date range filter
     if (exportOptions.dateRange.start && exportOptions.dateRange.end) {
@@ -221,7 +199,8 @@ export function ExportManager() {
     document.body.removeChild(link)
   }
 
-  const exportToJSON = (data: any[], filename: string) => {
+  // const exportToJSON = (data: any[], filename: string) => {
+  const exportToJSON = (data: Record<string, unknown>[], filename: string) => {
     const config = exportConfigs[activeTab]
     const selectedFields = exportOptions.includeFields.length > 0 
       ? exportOptions.includeFields 

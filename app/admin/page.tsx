@@ -14,18 +14,9 @@ import {
   Award,
   Activity
 } from 'lucide-react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Button } from '@/app/components/ui/button'
-
-interface AdminStats {
-  totalDonations: number
-  totalAmount: number
-  totalVolunteers: number
-  totalUsers: number
-  pendingDonations: number
-  pendingVolunteers: number
-  monthlyTrend: any[]
-}
+import { AdminStats, StatCardProps } from '../types/admin/types'
 
 export default function AdminDashboardPage() {
   const { user } = useAuth()
@@ -71,7 +62,7 @@ export default function AdminDashboardPage() {
     }
   }
 
-  const StatCard = ({ title, value, description, icon: Icon, color }: any) => (
+  const StatCard = ({ title, value, description, icon: Icon, color }: StatCardProps) => (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
