@@ -77,3 +77,22 @@ export interface PrivacySettings {
   marketingEmails: boolean
   thirdPartySharing: boolean
 }
+
+export interface StatCardProps {
+  title: string
+  value: string | number
+  change?: string
+  changeType?: 'positive' | 'negative' | 'neutral'
+  icon: React.ComponentType<{ className?: string }>
+  color: string
+  description?: string
+}
+
+export interface QuickActionProps {
+  title: string
+  description: string
+  href: string
+  icon: React.ComponentType<{ className?: string }>
+  color: string
+  badge?: string
+}

@@ -23,19 +23,9 @@ import {
 import { useProfile } from '@/hooks/useProfile'
 import { useDonations } from '@/hooks/useDonations'
 import { useVolunteer } from '@/hooks/useVolunteer'
-import { ProfileSettings } from '@/components/dashboard/ProfileSettings'
-import { UserProgress } from '@/components/dashboard/UserProgress'
-import { DonationHistory } from '@/components/dashboard/DonationHistory'
-
-interface StatCardProps {
-  title: string
-  value: string | number
-  change?: string
-  changeType?: 'positive' | 'negative' | 'neutral'
-  icon: React.ComponentType<{ className?: string }>
-  color: string
-  description?: string
-}
+import { QuickActionProps, StatCardProps } from '../types/admin/types'
+import { UserProgress } from '../components/dashboard/UserProgress'
+import { ProfileSettings } from '../components/dashboard/ProfileSettings'
 
 function StatCard({ title, value, change, changeType, icon: Icon, color, description }: StatCardProps) {
   const getChangeColor = () => {
@@ -67,15 +57,6 @@ function StatCard({ title, value, change, changeType, icon: Icon, color, descrip
       </div>
     </div>
   )
-}
-
-interface QuickActionProps {
-  title: string
-  description: string
-  href: string
-  icon: React.ComponentType<{ className?: string }>
-  color: string
-  badge?: string
 }
 
 function QuickAction({ title, description, href, icon: Icon, color, badge }: QuickActionProps) {
@@ -114,7 +95,8 @@ export default function DashboardPage() {
   const router = useRouter()
   const { profile, loading: profileLoading } = useProfile()
   const { donations, loading: donationsLoading } = useDonations()
-  const { application, loading: volunteerLoading } = useVolunteer()
+  // const { application, loading: volunteerLoading } = useVolunteer()
+  const { volunteerStatus, loading: volunteerLoading } = useVolunteer()
   
   const [timeOfDay, setTimeOfDay] = useState('')
 
@@ -143,7 +125,8 @@ export default function DashboardPage() {
   const totalDonated = donations?.reduce((sum, donation) => sum + donation.amount, 0) || 0
   const totalDonations = donations?.length || 0
   const averageDonation = totalDonations > 0 ? totalDonated / totalDonations : 0
-  const isVolunteer = application?.status === 'approved'
+  const isVolunteer = volunteerStatus?.status === 'active'
+
   
   // Calculate impact score (mock calculation)
   const impactScore = Math.round((totalDonated / 10) + (totalDonations * 5) + (isVolunteer ? 50 : 0))
@@ -174,7 +157,7 @@ export default function DashboardPage() {
               <div>
                 <h1 className="text-3xl font-bold mb-2">{getGreeting()}</h1>
                 <p className="text-teal-100 text-lg mb-4">
-                  Welcome back to your impact dashboard. Here's what's happening with your contributions.
+                  Welcome back to your impact dashboard. Here&apos;s what&apos;s happening with your contributions.
                 </p>
                 <div className="flex items-center space-x-6 text-sm">
                   <div className="flex items-center">
