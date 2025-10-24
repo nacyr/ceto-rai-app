@@ -26,3 +26,34 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   }
 })
 
+
+// import { createClient, SupabaseClient } from '@supabase/supabase-js'
+
+// // --- fallback values (so app never crashes) ---
+// const fallbackUrl = 'https://placeholder-project.supabase.co'
+// const fallbackAnonKey =
+//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.placeholder.token.key'
+
+// // --- read env or fallback ---
+// const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || fallbackUrl
+// const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || fallbackAnonKey
+
+// if (
+//   (!process.env.NEXT_PUBLIC_SUPABASE_URL ||
+//     !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) &&
+//   process.env.NODE_ENV === 'development'
+// ) {
+//   console.warn('⚠️ Using fallback Supabase client — read-only mock mode.')
+// }
+
+// export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseAnonKey, {
+//   auth: {
+//     autoRefreshToken: true,
+//     persistSession: true,
+//     detectSessionInUrl: true,
+//   },
+//   global: {
+//     headers: { 'X-Client-Info': 'ceto-rai-app' },
+//   },
+//.. })
+
