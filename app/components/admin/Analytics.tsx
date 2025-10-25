@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
 import { 
   BarChart3, 
@@ -5,56 +6,15 @@ import {
   Users, 
   DollarSign, 
   Heart,
-  Calendar,
   Award,
   Activity,
   PieChart,
-  Target,
-  Clock,
-  CheckCircle
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card';
 import { Button } from '@/app/components/ui/button';
 import { Progress } from '@/app/components/ui/progress';
+import { AnalyticsData } from '@/app/types/admin/types';
 
-interface AnalyticsData {
-  overview: {
-    totalDonations: number;
-    totalAmount: number;
-    totalVolunteers: number;
-    totalUsers: number;
-    monthlyGrowth: number;
-  };
-  donationsByProgram: Array<{
-    program: string;
-    amount: number;
-    count: number;
-    percentage: number;
-  }>;
-  donationsTrend: Array<{
-    month: string;
-    amount: number;
-    count: number;
-  }>;
-  volunteerStats: {
-    pending: number;
-    approved: number;
-    rejected: number;
-    totalApplications: number;
-  };
-  topDonors: Array<{
-    name: string;
-    email: string;
-    totalAmount: number;
-    donationCount: number;
-  }>;
-  recentActivity: Array<{
-    type: 'donation' | 'volunteer' | 'user';
-    description: string;
-    timestamp: string;
-    amount?: number;
-  }>;
-}
 
 export function Analytics() {
   const [data, setData] = useState<AnalyticsData>({
@@ -163,7 +123,7 @@ export function Analytics() {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-3xl font-bold text-gray-900">Analytics Dashboard</h2>
-          <p className="text-gray-600">Comprehensive insights into your organization's performance</p>
+          <p className="text-gray-600">Comprehensive insights into your organization&apos;s performance</p>
         </div>
         <div className="flex items-center space-x-2">
           <select

@@ -293,3 +293,43 @@ export interface AdmindonationManager {
     email: string;
   };
 }
+
+
+export interface AnalyticsData {
+  overview: {
+    totalDonations: number;
+    totalAmount: number;
+    totalVolunteers: number;
+    totalUsers: number;
+    monthlyGrowth: number;
+  };
+  donationsByProgram: Array<{
+    program: string;
+    amount: number;
+    count: number;
+    percentage: number;
+  }>;
+  donationsTrend: Array<{
+    month: string;
+    amount: number;
+    count: number;
+  }>;
+  volunteerStats: {
+    pending: number;
+    approved: number;
+    rejected: number;
+    totalApplications: number;
+  };
+  topDonors: Array<{
+    name: string;
+    email: string;
+    totalAmount: number;
+    donationCount: number;
+  }>;
+  recentActivity: Array<{
+    type: 'donation' | 'volunteer' | 'user';
+    description: string;
+    timestamp: string;
+    amount?: number;
+  }>;
+}
