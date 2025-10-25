@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '@/app/lib/supabase';
 import { useAuth } from '@/app/contexts/AuthContext';
+import { supabase } from '@/lib/supabaseClient';
 
 interface VolunteerApplication {
   id: string;
@@ -32,7 +32,13 @@ export function VolunteerTracker() {
         .single();
 
       if (error) throw error;
-      setApplication(data);
+      // setApplication(data);
+      setApplication({
+        ...data,
+        interests: data.interests ? data.interests : [],
+        skills: typeof data.skills === 'string' ? data.skills.split(',') : data.skills || [],
+      });
+
     } catch (error) {
       console.error('Error:', error);
     } finally {

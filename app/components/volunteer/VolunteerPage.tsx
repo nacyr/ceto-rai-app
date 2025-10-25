@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useAuth } from '@/app/contexts/AuthContext'
 import { Steps } from './Steps'
 import { PersonalInfo } from './steps/PersonalInfo'
 import { SkillsAvailability } from './steps/SkillsAvailability'

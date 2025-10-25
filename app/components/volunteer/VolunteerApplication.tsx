@@ -1,6 +1,7 @@
+'use client'
 import { useState } from 'react';
 import { useAuth } from '@/app/contexts/AuthContext';
-import { supabase } from '@/app/lib/supabase';
+import { supabase } from '@/lib/supabaseClient';
 
 export function VolunteerApplication() {
   const { user } = useAuth();
