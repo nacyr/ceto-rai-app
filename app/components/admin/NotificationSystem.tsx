@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/app/lib/supabase'
 import { 
   Bell,
   Check, 
@@ -19,6 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/ca
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog'
 import { formatDate } from '@/utils/formatters'
 import { NotificationStats, AdminNotification } from '@/app/types/admin/types'
+import { supabase } from '@/lib/supabaseClient'
 
 
 export function NotificationSystem() {

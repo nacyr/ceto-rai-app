@@ -2,7 +2,6 @@
 'use client'
 
 import { useState } from 'react'
-// import { supabase } from '@/app/lib/supabase'
 import { 
   Download, 
   FileText, 
