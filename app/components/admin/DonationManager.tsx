@@ -19,25 +19,12 @@ import { Input } from '@/app/components/ui/input'
 import { Badge } from '@/app/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { supabase } from '@/lib/supabaseClient'
+import { AdmindonationManager } from '@/app/types/admin/types'
 
-interface Donation {
-  id: string;
-  amount: number;
-  program: string;
-  status: 'completed' | 'pending' | 'failed';
-  created_at: string;
-  donor_id: string;
-  payment_method?: string;
-  transaction_id?: string;
-  profiles?: {
-    full_name: string;
-    email: string;
-  };
-}
 
 export function DonationManager() {
-  const [donations, setDonations] = useState<Donation[]>([])
-  const [filteredDonations, setFilteredDonations] = useState<Donation[]>([])
+  const [donations, setDonations] = useState<AdmindonationManager[]>([])
+  const [filteredDonations, setFilteredDonations] = useState<AdmindonationManager[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')

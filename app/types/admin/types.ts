@@ -277,3 +277,19 @@ export interface AdminDonation {
   created_at: string
   profiles?: DonationProfile | null
 }
+
+
+export interface AdmindonationManager {
+  id: string;
+  amount: number;
+  program: string;
+  status: 'completed' | 'pending' | 'failed';
+  created_at: string;
+  donor_id: string;
+  payment_method?: string;
+  transaction_id?: string;
+  profiles?: {
+    full_name: string;
+    email: string;
+  };
+}
