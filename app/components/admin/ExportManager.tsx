@@ -2,12 +2,10 @@
 'use client'
 
 import { useState } from 'react'
-import { supabase } from '@/app/lib/supabase'
+// import { supabase } from '@/app/lib/supabase'
 import { 
   Download, 
   FileText, 
-  // Calendar, 
-  // Filter, 
   Users, 
   DollarSign, 
   UserCheck,
@@ -22,6 +20,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app
 import { Badge } from '@/app/components/ui/badge'
 import { Input } from '@/app/components/ui/input'
 import { ExportJob, ExportOptions } from '@/app/types/admin/types'
+import { supabase } from '@/lib/supabaseClient'
 
 
 export function ExportManager() {
