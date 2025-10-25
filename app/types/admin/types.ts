@@ -162,19 +162,6 @@ export interface AdminStats {
   monthlyTrend: MonthlyTrend[]
 }
 
-// export interface ExportOptions {
-//   format: 'csv' | 'json' | 'xlsx'
-//   dateRange: {
-//     start: string
-//     end: string
-//   }
-//   filters: {
-//     status?: string
-//     program?: string
-//     skills?: string[]
-//   }
-//   includeFields: string[]
-// }
 export interface ExportOptions {
   format: 'csv' | 'json' | 'xlsx'
   dateRange: {
@@ -190,7 +177,6 @@ export interface ExportOptions {
   includeFields: string[]
 }
 
-
 export interface ExportJob {
   id: string
   type: 'donations' | 'volunteers' | 'users'
@@ -201,4 +187,24 @@ export interface ExportJob {
   downloadUrl?: string
   recordCount?: number
   error?: string
+}
+
+
+export interface AdminNotification {
+  id: string
+  type: 'volunteer_pending' | 'donation_failed' | 'user_registration' | 'system_alert' | 'approval_needed'
+  title: string
+  message: string
+  priority: 'low' | 'medium' | 'high' | 'urgent'
+  read: boolean
+  created_at: string
+  data?: unknown
+}
+
+export interface NotificationStats {
+  pendingVolunteers: number
+  failedDonations: number
+  newUsers: number
+  systemAlerts: number
+  totalUnread: number
 }

@@ -3,10 +3,8 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/app/lib/supabase'
 import { 
-  Bell, 
-  X, 
+  Bell,
   Check, 
-  Clock, 
   Users, 
   DollarSign, 
   AlertTriangle,
@@ -17,31 +15,14 @@ import {
 } from 'lucide-react'
 import { Button } from '@/app/components/ui/button'
 import { Badge } from '@/app/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog'
 import { formatDate } from '@/utils/formatters'
+import { NotificationStats, AdminNotification } from '@/app/types/admin/types'
 
-interface Notification {
-  id: string
-  type: 'volunteer_pending' | 'donation_failed' | 'user_registration' | 'system_alert' | 'approval_needed'
-  title: string
-  message: string
-  priority: 'low' | 'medium' | 'high' | 'urgent'
-  read: boolean
-  created_at: string
-  data?: any
-}
-
-interface NotificationStats {
-  pendingVolunteers: number
-  failedDonations: number
-  newUsers: number
-  systemAlerts: number
-  totalUnread: number
-}
 
 export function NotificationSystem() {
-  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [notifications, setNotifications] = useState<AdminNotification[]>([])
   const [stats, setStats] = useState<NotificationStats>({
     pendingVolunteers: 0,
     failedDonations: 0,
@@ -77,7 +58,7 @@ export function NotificationSystem() {
   const fetchNotifications = async () => {
     try {
       // Generate notifications based on current data
-      const notifications: Notification[] = []
+      const notifications: AdminNotification[] = []
 
       // Check for pending volunteers
       const { data: pendingVolunteers } = await supabase
@@ -347,7 +328,7 @@ export function NotificationSystem() {
             <div className="text-center py-8">
               <Bell className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">No notifications</h3>
-              <p className="text-gray-500">You're all caught up! Check back later for updates.</p>
+              <p className="text-gray-500">You&apos;re all caught up! Check back later for updates.</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -429,7 +410,7 @@ export function NotificationSystem() {
                               <label className="text-sm font-medium text-gray-500">Created</label>
                               <p className="text-sm text-gray-900">{formatDate(notification.created_at)}</p>
                             </div>
-                            {notification.data && (
+                            {typeof notification.data === 'object' && (
                               <div>
                                 <label className="text-sm font-medium text-gray-500">Additional Information</label>
                                 <pre className="text-xs bg-gray-100 p-2 rounded mt-1 overflow-auto">
