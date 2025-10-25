@@ -1,4 +1,4 @@
-import { supabase } from '@/app/lib/supabase'
+import { supabase } from "@/lib/supabaseServer"
 
 export async function sendVolunteerEmail(userId: string, type: 'confirmation' | 'approval' | 'rejection') {
   const { data: { user } } = await supabase.auth.admin.getUserById(userId)

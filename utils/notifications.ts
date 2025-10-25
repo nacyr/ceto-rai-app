@@ -1,4 +1,4 @@
-import { supabase } from '@/app/lib/supabase'
+import { supabase } from "@/lib/supabaseServer"
 
 export async function sendEmailNotification(
   userId: string,
