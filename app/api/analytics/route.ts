@@ -1,14 +1,16 @@
+import { supabase } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
-import { supabase } from '@/app/lib/supabase'
 
 export async function GET(request: Request) {
-  try {
+  try { 
     const { searchParams } = new URL(request.url)
     const type = searchParams.get('type') || 'overview'
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const startDate = searchParams.get('startDate')
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const endDate = searchParams.get('endDate')
 
-    let data: any = {}
+    let data: unknown
 
     switch (type) {
       case 'overview':

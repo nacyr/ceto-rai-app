@@ -26,3 +26,12 @@ export const supabase = createClient(supabaseUrl as string, supabaseAnonKey as s
     },
   },
 });
+
+// import { createClient } from '@supabase/supabase-js'
+
+// const supabaseUrl = process.env.NEXT_SUPABASE_URL!
+// const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+
+// export const supabaseServer = createClient(supabaseUrl, supabaseServiceKey, {
+//   auth: { persistSession: false }
+// })

@@ -1,4 +1,4 @@
-import { supabase } from './supabase'
+import { supabase } from './supabaseClient'
 import { Database } from '../types/database'
 
 // Profile Management
