@@ -14,19 +14,12 @@ import {
   Calendar
 } from 'lucide-react'
 import { supabase } from '@/lib/supabaseClient'
+import { AdminUserManager } from '@/app/types/admin/types'
 
-interface User {
-  id: string
-  email: string
-  full_name: string | null
-  avatar_url: string | null
-  created_at: string
-  status?: 'pending' | 'approved' | 'rejected'
-}
 
 export function UserManager() {
-  const [users, setUsers] = useState<User[]>([])
-  const [filteredUsers, setFilteredUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<AdminUserManager[]>([])
+  const [filteredUsers, setFilteredUsers] = useState<AdminUserManager[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('all')
@@ -52,7 +45,7 @@ export function UserManager() {
       const usersWithStatus = data.map(user => ({
         ...user,
         status: Math.random() > 0.7 ? 'pending' : Math.random() > 0.5 ? 'approved' : 'rejected'
-      })) as User[]
+      })) as AdminUserManager[]
 
       setUsers(usersWithStatus)
     } catch (error) {
