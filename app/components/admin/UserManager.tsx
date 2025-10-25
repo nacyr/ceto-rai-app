@@ -1,5 +1,6 @@
+'use client'
+
 import { useState, useEffect } from 'react'
-import { supabase } from '@/app/lib/supabase'
 import { Button } from '@/app/components/ui/button'
 import { Badge } from '@/app/components/ui/badge'
 import { Input } from '@/app/components/ui/input'
@@ -12,6 +13,7 @@ import {
   Mail, 
   Calendar
 } from 'lucide-react'
+import { supabase } from '@/lib/supabaseClient'
 
 interface User {
   id: string
