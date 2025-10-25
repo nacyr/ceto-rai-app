@@ -362,3 +362,25 @@ export interface AdminVolunteerManager {
     email: string;
   };
 }
+
+
+export interface ReportTemplate {
+  id: string
+  title: string
+  description: string
+  type: 'donation' | 'volunteer' | 'impact' | 'comprehensive'
+  icon: unknown
+  format: 'pdf' | 'csv' | 'excel'
+  lastGenerated?: string
+  size?: string
+}
+
+export interface GeneratedReport {
+  id: string
+  title: string
+  type: string
+  generatedAt: string
+  format: string
+  size: string
+  downloadUrl: string
+}

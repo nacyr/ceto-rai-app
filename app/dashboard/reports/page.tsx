@@ -1,13 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, ComponentType, SVGProps } from 'react'
 import { useAuth } from '@/app/contexts/AuthContext'
-import { supabase } from '@/app/lib/supabase'
 import { 
   FileText, 
   Download, 
   Calendar, 
-  Filter,
   BarChart3,
   PieChart,
   TrendingUp,
@@ -20,27 +18,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Button } from '@/app/components/ui/button'
 import { Badge } from '@/app/components/ui/badge'
-
-interface ReportTemplate {
-  id: string
-  title: string
-  description: string
-  type: 'donation' | 'volunteer' | 'impact' | 'comprehensive'
-  icon: any
-  format: 'pdf' | 'csv' | 'excel'
-  lastGenerated?: string
-  size?: string
-}
-
-interface GeneratedReport {
-  id: string
-  title: string
-  type: string
-  generatedAt: string
-  format: string
-  size: string
-  downloadUrl: string
-}
+import { GeneratedReport, ReportTemplate } from '@/app/types/admin/types'
 
 export default function ReportsPage() {
   const { user } = useAuth()
@@ -247,7 +225,10 @@ export default function ReportsPage() {
             <Card key={template.id} className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
-                  <template.icon className="w-5 h-5 text-teal-600" />
+                  {(() => {
+                    const Icon = template.icon as ComponentType<SVGProps<SVGSVGElement>>
+                    return <Icon className="w-5 h-5 text-teal-600" />
+                  })()}
                   <span className="text-lg">{template.title}</span>
                 </CardTitle>
                 <CardDescription>{template.description}</CardDescription>
@@ -408,7 +389,7 @@ export default function ReportsPage() {
               <ul className="text-sm text-gray-600 space-y-1">
                 <li>• <strong>Donation Reports:</strong> Track your giving history and tax deductions</li>
                 <li>• <strong>Volunteer Reports:</strong> Monitor your volunteer activities and hours</li>
-                <li>• <strong>Impact Reports:</strong> See the difference you're making</li>
+                <li>• <strong>Impact Reports:</strong> See the difference you&apos;re making</li>
                 <li>• <strong>Comprehensive:</strong> Complete overview of all activities</li>
               </ul>
             </div>
