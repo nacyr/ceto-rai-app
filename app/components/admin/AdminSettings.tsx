@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { supabase } from '@/app/lib/supabase'
 import { 
   Settings, 
   Save, 
@@ -25,6 +24,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/ca
 import { Badge } from '@/app/components/ui/badge'
 import { Switch } from '@/app/components/ui/switch'
 import { SystemSettings, SystemStats } from '@/app/types/admin/types'
+import { supabase } from '@/lib/supabaseClient'
 
 
 export function AdminSettings() {
