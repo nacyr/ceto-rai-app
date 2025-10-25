@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { supabase } from '@/app/lib/supabase'
 import { createProfile, updateProfile, getProfile } from '@/lib/api'
+import { supabase } from '@/lib/supabaseServer'
 
 // Create a new profile
 export async function POST(request: Request) {

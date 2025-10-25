@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/app/contexts/AuthContext'
-import { supabase } from '@/app/lib/supabase'
 import { 
   Users, 
   Clock, 
@@ -17,30 +16,9 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Button } from '@/app/components/ui/button'
 import { Badge } from '@/app/components/ui/badge'
+import { VolunteerApplication, VolunteerOpportunity } from '@/app/types/admin/types'
+import { supabase } from '@/lib/supabaseClient'
 
-interface VolunteerApplication {
-  id: string
-  full_name: string
-  email: string
-  phone: string
-  skills: string
-  availability: string
-  motivation: string
-  status: 'pending' | 'approved' | 'rejected'
-  created_at: string
-  updated_at: string
-}
-
-interface VolunteerOpportunity {
-  id: string
-  title: string
-  description: string
-  location: string
-  date: string
-  duration: string
-  skills_needed: string[]
-  spots_available: number
-}
 
 export default function VolunteerPage() {
   const { user } = useAuth()
@@ -191,7 +169,7 @@ export default function VolunteerPage() {
               </Badge>
               {application.status === 'pending' && (
                 <span className="text-sm text-gray-500">
-                  We'll review your application within 3-5 business days
+                  We&apos;ll review your application within 3-5 business days
                 </span>
               )}
             </div>
@@ -248,7 +226,7 @@ export default function VolunteerPage() {
           </CardHeader>
           <CardContent>
             <p className="text-gray-600 mb-4">
-              You haven't submitted a volunteer application yet. Apply now to start making an impact in your community.
+              You haven&apos; t submitted a volunteer application yet. Apply now to start making an impact in your community.
             </p>
             <Button 
               className="bg-teal-600 hover:bg-teal-700"

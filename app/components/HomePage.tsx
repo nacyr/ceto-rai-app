@@ -16,7 +16,7 @@ import {
   Globe,
   LucideIcon,
 } from "lucide-react";
-import { supabase } from "../lib/supabase";
+import { supabase } from "@/lib/supabaseClient";
 
 const iconMap: Record<string, LucideIcon> = {
   GraduationCap,

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { supabase } from '@/app/lib/supabase'
 import AdminProtectedRoute from '@/app/components/AdminProtectedRoute'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Button } from '@/app/components/ui/button'
@@ -17,13 +16,9 @@ import {
 } from 'lucide-react'
 import { Badge } from '@/app/components/ui/badge'
 import { User } from '@/app/types/admin/types'
+import { supabase } from '@/lib/supabaseClient'
 
-// ✅ Fixes applied:
-// Wrapped filterUsers in useCallback to stabilize it
-// Added [filterUsers] as dependency of useEffect
-// Removed ESLint warning
-// Preserved TypeScript correctness
-// No change in UI or behavior
+
 export default function UsersManagementPage() {
   const [users, setUsers] = useState<User[]>([])
   const [filteredUsers, setFilteredUsers] = useState<User[]>([])

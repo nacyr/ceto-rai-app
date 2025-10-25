@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/app/contexts/AuthContext'
-import { supabase } from '@/app/lib/supabase'
 import { DonationHistory } from '@/app/components/dashboard/DonationHistory'
 import { 
   Heart, 
@@ -11,19 +10,12 @@ import {
   DollarSign,
   BarChart3,
   Download,
-  Filter
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Button } from '@/app/components/ui/button'
+import { DonationStats } from '@/app/types/admin/types'
+import { supabase } from '@/lib/supabaseClient'
 
-interface DonationStats {
-  totalAmount: number
-  totalDonations: number
-  averageDonation: number
-  lastDonationDate: string
-  favoriteProgram: string
-  monthlyTrend: any[]
-}
 
 export default function DonationsPage() {
   const { user } = useAuth()

@@ -3,7 +3,6 @@
 import React from 'react'
 import { useState, useEffect, useCallback } from 'react'
 import { useAuth } from '@/app/contexts/AuthContext'
-import { supabase } from '@/app/lib/supabase'
 import { ImpactTracker } from '@/app/components/dashboard/ImpactTracker'
 import {
   Users,
@@ -19,6 +18,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app
 import { Button } from '@/app/components/ui/button'
 import { Achievement, Donation, ImpactData } from '@/app/types/admin/types'
 import { Progress } from '@/app/components/ui/progress'
+import { supabase } from '@/lib/supabaseClient'
 
 export default function ImpactPage() {
   const { user } = useAuth()

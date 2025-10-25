@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/app/lib/supabase'
 import { formatCurrency, formatDate } from '@/utils/formatters'
+import { AdminDonation } from '@/app/types/admin/types'
+import { supabase } from '@/lib/supabaseClient'
 
 export default function DonationsPage() {
-  const [donations, setDonations] = useState<any[]>([])
+  const [donations, setDonations] = useState<AdminDonation[]>([])
   const [loading, setLoading] = useState(true)
   const [totalAmount, setTotalAmount] = useState(0)
 

@@ -1,5 +1,5 @@
+import { supabase } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
-import { supabase } from '@/app/lib/supabase'
 
 // Email configuration
 const EMAIL_CONFIG = {

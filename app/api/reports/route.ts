@@ -1,8 +1,9 @@
+import { MonthlySummaryItem } from '@/app/types/admin/types'
+import { supabase } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
-import { supabase } from '@/app/lib/supabase'
 
 // Helper function to convert data to CSV
-function convertToCSV(data: any[]): string {
+function convertToCSV(data: Record<string, unknown>[]): string {
   if (!data || data.length === 0) return ''
   
   const headers = Object.keys(data[0])
@@ -44,9 +45,10 @@ export async function GET(request: Request) {
     const program = searchParams.get('program')
     const status = searchParams.get('status')
 
-    let data: any[] = []
+    // const data: Record<string, unknown>[] = []
+    let reportData: Record<string, unknown>[] = []
     let filename = ''
-    let reportData: any[] = []
+
 
     switch (type) {
       case 'donations':
@@ -154,7 +156,7 @@ export async function GET(request: Request) {
           .select('amount, created_at, program, status')
           .order('created_at', { ascending: true })
 
-        const monthlySummary: { [key: string]: any } = {}
+        const monthlySummary: Record<string, MonthlySummaryItem> = {}
         
         monthlyData.data?.forEach(donation => {
           const month = new Date(donation.created_at).toISOString().slice(0, 7)

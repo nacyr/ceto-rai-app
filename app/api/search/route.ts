@@ -1,5 +1,5 @@
+import { supabase } from '@/lib/supabaseServer'
 import { NextResponse } from 'next/server'
-import { supabase } from '@/app/lib/supabase'
 
 export async function GET(request: Request) {
   try {
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     }
 
     const searchTerm = query.toLowerCase()
-    let results: any[] = []
+    let results: unknown[] = []
 
     // Search across different tables based on type
     if (type === 'all' || type === 'profiles') {
@@ -75,7 +75,7 @@ export async function GET(request: Request) {
 
     // Sort combined results by created_at if type is 'all'
     if (type === 'all') {
-      results.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+      results.sort((a, b) => new Date((b as { created_at: string }).created_at).getTime() - new Date((a as { created_at: string }).created_at).getTime())
     }
 
     return NextResponse.json({
@@ -110,7 +110,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Either query or filters are required' }, { status: 400 })
     }
 
-    let results: any[] = []
+    let results: unknown[] = []
     let totalCount = 0
 
     // Build base queries based on type
@@ -232,11 +232,11 @@ export async function POST(request: Request) {
     // Sort combined results
     if (type === 'all') {
       results.sort((a, b) => {
-        const aValue = a[sortBy] || a.created_at
-        const bValue = b[sortBy] || b.created_at
+        const aValue = (a as Record<string, unknown>)[sortBy] || (a as { created_at: string }).created_at
+        const bValue = (b as Record<string, unknown>)[sortBy] || (b as { created_at: string }).created_at
         return sortOrder === 'asc' 
-          ? new Date(aValue).getTime() - new Date(bValue).getTime()
-          : new Date(bValue).getTime() - new Date(aValue).getTime()
+          ? new Date(aValue as string).getTime() - new Date(bValue as string).getTime()
+          : new Date(bValue as string).getTime() - new Date(aValue as string).getTime()
       })
     }
 

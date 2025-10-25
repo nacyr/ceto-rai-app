@@ -45,7 +45,6 @@ export interface Donation {
   amount: number
 }
 
-
 export interface UserSettings {
   fullName: string
   email: string
@@ -207,4 +206,74 @@ export interface NotificationStats {
   newUsers: number
   systemAlerts: number
   totalUnread: number
+}
+
+
+export interface VolunteerApplication {
+  id: string
+  full_name: string
+  email: string
+  phone: string
+  skills: string
+  availability: string
+  motivation: string
+  status: 'pending' | 'approved' | 'rejected'
+  created_at: string
+  updated_at: string
+}
+
+export interface VolunteerOpportunity {
+  id: string
+  title: string
+  description: string
+  location: string
+  date: string
+  duration: string
+  skills_needed: string[]
+  spots_available: number
+}
+
+export interface DonationStats {
+  totalAmount: number
+  totalDonations: number
+  averageDonation: number
+  lastDonationDate: string
+  favoriteProgram: string
+  monthlyTrend: MonthlyTrend[]
+}
+
+export interface MonthlySummaryItem {
+  month: string
+  totalDonations: number
+  totalAmount: number
+  programs: Record<string, number>
+  statuses: Record<string, number>
+}
+
+export interface VolunteerProfile {
+  full_name: string
+  email: string
+}
+
+export interface Volunteer {
+  id: string
+  status: string
+  skills?: string[]
+  availability?: string
+  created_at: string
+  profiles?: VolunteerProfile
+}
+
+export interface DonationProfile {
+  full_name: string
+  email: string
+}
+
+export interface AdminDonation {
+  id: string
+  amount: number
+  program: string | null
+  status: 'pending' | 'completed' | 'failed'
+  created_at: string
+  profiles?: DonationProfile | null
 }

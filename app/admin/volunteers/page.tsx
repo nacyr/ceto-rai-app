@@ -1,11 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '@/app/lib/supabase'
+// import { supabase } from '@/app/lib/supabase'
 import { formatDate } from '@/utils/formatters'
+import { supabase } from '@/lib/supabaseClient'
+import { Volunteer } from '@/app/types/admin/types'
 
 export default function VolunteersPage() {
-  const [volunteers, setVolunteers] = useState<any[]>([])
+  const [volunteers, setVolunteers] = useState<Volunteer[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
