@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDonations } from '@/hooks/useDonations'
 import { formatCurrency, formatDate } from '@/utils/formatters'
-import { Filter, Download, Search, Calendar, DollarSign, Heart, Users, Stethoscope } from 'lucide-react'
+import { Download, Search, Calendar, DollarSign, Heart, Users, Stethoscope } from 'lucide-react'
 
 export function DonationHistory() {
   const { donations, loading } = useDonations()
@@ -9,8 +9,10 @@ export function DonationHistory() {
   const [searchTerm, setSearchTerm] = useState('')
   const [sortBy, setSortBy] = useState('date')
 
-  const getProgramIcon = (program: string) => {
-    switch (program.toLowerCase()) {
+  const getProgramIcon = (program: string | null) => {
+    const safeProgram = program ?? '' // fallback if null
+
+    switch (safeProgram.toLowerCase()) {
       case 'education':
         return <Users className="h-4 w-4 text-blue-500" />
       case 'healthcare':
@@ -21,6 +23,7 @@ export function DonationHistory() {
         return <DollarSign className="h-4 w-4 text-teal-500" />
     }
   }
+
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -37,20 +40,27 @@ export function DonationHistory() {
 
   const filteredDonations = donations
     .filter(donation => {
-      if (filter !== 'all' && donation.program !== filter) return false
-      if (searchTerm && !donation.program.toLowerCase().includes(searchTerm.toLowerCase())) return false
+      const program = donation.program ?? '' // safely coalesce null → empty string
+
+      if (filter !== 'all' && program !== filter) return false
+      if (searchTerm && !program.toLowerCase().includes(searchTerm.toLowerCase())) return false
+
       return true
     })
+
     .sort((a, b) => {
-      switch (sortBy) {
-        case 'amount':
-          return b.amount - a.amount
-        case 'program':
-          return a.program.localeCompare(b.program)
-        default:
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      }
-    })
+    const programA = a.program ?? ''
+    const programB = b.program ?? ''
+
+    switch (sortBy) {
+      case 'amount':
+        return b.amount - a.amount
+      case 'program':
+        return programA.localeCompare(programB)
+      default:
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    }
+  })
 
   if (loading) {
     return (
@@ -131,6 +141,7 @@ export function DonationHistory() {
       <div className="divide-y divide-gray-200">
         {filteredDonations.length > 0 ? (
           filteredDonations.map((donation) => (
+            
             <div key={donation.id} className="px-4 py-4 sm:px-6 hover:bg-gray-50 transition-colors">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
