@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+'use client'
+
 import { useEffect, useState } from 'react'
-import { supabase } from '@/app/lib/supabase'
 import { formatDate } from '@/utils/formatters'
 import { 
   Search, 
@@ -12,43 +14,22 @@ import {
   Users,
   Calendar,
   User,
-  Mail,
-  Phone,
-  MapPin,
   RefreshCw,
-  ChevronDown,
-  Star,
   Award,
   FileText
 } from 'lucide-react'
 import { Button } from '@/app/components/ui/button'
 import { Input } from '@/app/components/ui/input'
 import { Badge } from '@/app/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/app/components/ui/dialog'
+import { supabase } from '@/lib/supabaseClient'
+import { AdminVolunteerManager } from '@/app/types/admin/types'
 
-interface Volunteer {
-  id: string;
-  user_id: string;
-  skills: string[];
-  availability: string;
-  experience: string;
-  motivation: string;
-  status: 'pending' | 'approved' | 'rejected';
-  created_at: string;
-  phone?: string;
-  location?: string;
-  emergency_contact?: string;
-  background_check?: boolean;
-  profiles?: {
-    full_name: string;
-    email: string;
-  };
-}
 
 export function VolunteerManager() {
-  const [volunteers, setVolunteers] = useState<Volunteer[]>([])
-  const [filteredVolunteers, setFilteredVolunteers] = useState<Volunteer[]>([])
+  const [volunteers, setVolunteers] = useState<AdminVolunteerManager[]>([])
+  const [filteredVolunteers, setFilteredVolunteers] = useState<AdminVolunteerManager[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
@@ -57,7 +38,7 @@ export function VolunteerManager() {
   const [selectedVolunteers, setSelectedVolunteers] = useState<string[]>([])
   const [sortBy, setSortBy] = useState<'date' | 'name' | 'status'>('date')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
-  const [selectedVolunteer, setSelectedVolunteer] = useState<Volunteer | null>(null)
+  const [selectedVolunteer, setSelectedVolunteer] = useState<AdminVolunteerManager | null>(null)
 
   const availableSkills = [
     'Teaching',
@@ -259,7 +240,7 @@ export function VolunteerManager() {
     )
   }
 
-  const VolunteerDetailModal = ({ volunteer }: { volunteer: Volunteer }) => (
+  const VolunteerDetailModal = ({ volunteer }: { volunteer: AdminVolunteerManager }) => (
     <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
       <DialogHeader>
         <DialogTitle className="flex items-center">

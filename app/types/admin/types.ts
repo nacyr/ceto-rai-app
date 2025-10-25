@@ -342,3 +342,23 @@ export interface AdminUserManager {
   created_at: string
   status?: 'pending' | 'approved' | 'rejected'
 }
+
+
+export interface AdminVolunteerManager {
+  id: string;
+  user_id: string;
+  skills: string[];
+  availability: string;
+  experience: string;
+  motivation: string;
+  status: 'pending' | 'approved' | 'rejected';
+  created_at: string;
+  phone?: string;
+  location?: string;
+  emergency_contact?: string;
+  background_check?: boolean;
+  profiles?: {
+    full_name: string;
+    email: string;
+  };
+}
