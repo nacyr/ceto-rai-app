@@ -1,26 +1,24 @@
+'use client'
+
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react'
-import { supabase } from '@/app/lib/supabase'
 import { formatCurrency, formatDate } from '@/utils/formatters'
 import { 
   Search, 
   Filter, 
-  Download, 
-  Eye, 
-  Edit, 
+  Download,
   Check, 
   X, 
   Clock,
   DollarSign,
-  Calendar,
   User,
-  MoreHorizontal,
   RefreshCw,
-  ChevronDown
 } from 'lucide-react'
 import { Button } from '@/app/components/ui/button'
 import { Input } from '@/app/components/ui/input'
 import { Badge } from '@/app/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card'
+import { supabase } from '@/lib/supabaseClient'
 
 interface Donation {
   id: string;
@@ -135,6 +133,7 @@ export function DonationManager() {
 
     // Sort
     filtered.sort((a, b) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let aValue: any, bValue: any
       
       switch (sortBy) {
