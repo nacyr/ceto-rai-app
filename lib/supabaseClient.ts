@@ -1,39 +1,67 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import { createClient, SupabaseClient, Session, AuthChangeEvent } from '@supabase/supabase-js'
 
+/**
+ * Environment variables
+ */
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
-let supabaseInstance: SupabaseClient | null = null
+/**
+ * Type-safe Auth callback type
+ */
+type AuthChangeCallback = (
+  event: AuthChangeEvent,
+  session: { user: unknown; session: Session | null }
+) => void
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('⚠️ Supabase environment variables missing — using mock supabase client.')
+/**
+ * Creates a type-safe mock Supabase client (no `any` used)
+ */
+function createMockSupabaseClient(): SupabaseClient {
+  console.warn('⚠️ Running in DEMO MODE — using mock Supabase client.')
 
-  supabaseInstance = {
+  return {
     from: () => ({
-      select: () => Promise.resolve({ data: [], error: null }),
-      insert: () => Promise.resolve({ data: [], error: null }),
-      update: () => Promise.resolve({ data: [], error: null }),
-      delete: () => Promise.resolve({ data: [], error: null }),
-      eq: () => Promise.resolve({ data: [], error: null }),
-      order: () => Promise.resolve({ data: [], error: null }),
-      single: () => Promise.resolve({ data: null, error: null }),
+      select: async () => ({ data: [], error: null }),
+      insert: async () => ({ data: [], error: null }),
+      update: async () => ({ data: [], error: null }),
+      delete: async () => ({ data: [], error: null }),
+      eq: async () => ({ data: [], error: null }),
+      order: async () => ({ data: [], error: null }),
+      gte: async () => ({ data: [], error: null }),
+      lte: async () => ({ data: [], error: null }),
+      single: async () => ({ data: null, error: null }),
     }),
+
+    // Auth mock implementation
     auth: {
-      getSession: async () => ({ data: null }),
-      signInWithPassword: async () => ({ data: null }),
-      signOut: async () => ({ data: null }),
+      onAuthStateChange: (callback: AuthChangeCallback) => {
+        const mockSession = { user: null, session: null }
+        callback('SIGNED_OUT', mockSession)
+        return { data: { subscription: { unsubscribe: () => undefined } } }
+      },
+      getSession: async () => ({
+        data: { session: null },
+        error: null,
+      }),
+      signInWithPassword: async () => ({
+        data: { session: null, user: null },
+        error: null,
+      }),
+      signUp: async () => ({
+        data: { user: { id: 'mock-user-id' } },
+        error: null,
+      }),
+      signOut: async () => ({ error: null }),
     },
   } as unknown as SupabaseClient
-} else {
-  supabaseInstance = createClient(supabaseUrl, supabaseAnonKey)
 }
 
-export const supabase = supabaseInstance!
-
-
-// import { createClient } from '@supabase/supabase-js'
-
-// const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-// const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
-// export const supabase = createClient(supabaseUrl, supabaseAnonKey) 
+/**
+ * Exported Supabase client (real or mock)
+ */
+export const supabase: SupabaseClient =
+  isDemoMode || !supabaseUrl || !supabaseAnonKey
+    ? createMockSupabaseClient()
+    : createClient(supabaseUrl, supabaseAnonKey)
