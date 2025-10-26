@@ -1,22 +1,11 @@
-import { createClient, SupabaseClient, Session, AuthChangeEvent } from '@supabase/supabase-js'
+import { createClient, SupabaseClient, AuthChangeEvent, Session } from '@supabase/supabase-js'
 
-/**
- * Environment variables
- */
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true'
 
 /**
- * Type-safe Auth callback type
- */
-type AuthChangeCallback = (
-  event: AuthChangeEvent,
-  session: { user: unknown; session: Session | null }
-) => void
-
-/**
- * Creates a type-safe mock Supabase client (no `any` used)
+ * Define a type-safe mock Supabase client for demo mode
  */
 function createMockSupabaseClient(): SupabaseClient {
   console.warn('⚠️ Running in DEMO MODE — using mock Supabase client.')
@@ -34,32 +23,34 @@ function createMockSupabaseClient(): SupabaseClient {
       single: async () => ({ data: null, error: null }),
     }),
 
-    // Auth mock implementation
+    // Implement the auth interface to prevent runtime crashes
     auth: {
-      onAuthStateChange: (callback: AuthChangeCallback) => {
-        const mockSession = { user: null, session: null }
-        callback('SIGNED_OUT', mockSession)
+      async getSession() {
+        return { data: { session: null }, error: null }
+      },
+
+      onAuthStateChange(callback: (event: AuthChangeEvent, session: Session | null) => void) {
+        callback('SIGNED_OUT', null)
         return { data: { subscription: { unsubscribe: () => undefined } } }
       },
-      getSession: async () => ({
-        data: { session: null },
-        error: null,
-      }),
-      signInWithPassword: async () => ({
-        data: { session: null, user: null },
-        error: null,
-      }),
-      signUp: async () => ({
-        data: { user: { id: 'mock-user-id' } },
-        error: null,
-      }),
-      signOut: async () => ({ error: null }),
+
+      async signInWithPassword() {
+        return { data: { session: null, user: null }, error: null }
+      },
+
+      async signUp() {
+        return { data: { user: { id: 'mock-user-id', email: 'mock@example.com' } }, error: null }
+      },
+
+      async signOut() {
+        return { error: null }
+      },
     },
   } as unknown as SupabaseClient
 }
 
 /**
- * Exported Supabase client (real or mock)
+ * Export the Supabase client (real or mock)
  */
 export const supabase: SupabaseClient =
   isDemoMode || !supabaseUrl || !supabaseAnonKey
