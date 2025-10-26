@@ -100,7 +100,7 @@ export const teamMembers: TeamMember[] = [
       phone: '+234 706-294-6809',
       location: 'Abuja, Nigeria',
       joinDate: 'September 2020',
-      image: '/images/team/nasir.jpeg', 
+      image: '/images/team/nasiru.jpg', 
       bio: 'Nasir Armiyau is our technology specialist, responsible for maintaining and advancing our digital infrastructure. His expertise in information systems and data management has been crucial in modernizing our operations and improving our ability to track and measure impact. He also leads our digital outreach initiatives.',
       education: [
         'MSc. in Computer Science, Taraba State University, Taraba',
