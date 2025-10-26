@@ -19,7 +19,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/app
 import { Button } from '@/app/components/ui/button'
 import { Badge } from '@/app/components/ui/badge'
 import { GeneratedReport, ReportTemplate } from '@/app/types/admin/types'
-// import { supabase } from '@/lib/supabaseClient'
 
 export default function ReportsPage() {
   const { user } = useAuth()
