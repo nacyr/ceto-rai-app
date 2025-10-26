@@ -184,3 +184,17 @@ export interface AboutData {
   }
   values: ValueCard[]
 }
+
+export interface Event {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  time: string;
+  location: string;
+  image: string;
+  attendees: number;
+  maxAttendees: number;
+  category: 'education' | 'healthcare' | 'community' | 'fundraising';
+  status: 'upcoming' | 'ongoing' | 'completed';
+}
