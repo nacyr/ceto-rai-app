@@ -156,3 +156,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* About page image Scroll Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-slow {
+  animation: scroll 25s linear infinite;
+}
