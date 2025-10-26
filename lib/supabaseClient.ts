@@ -3,13 +3,12 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js'
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
-let supabase: SupabaseClient | null = null
+let supabaseInstance: SupabaseClient | null = null
 
-// Use mock client if env vars are missing
 if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('⚠️ Supabase environment variables missing — using mock supabase client.')
 
-  supabase = {
+  supabaseInstance = {
     from: () => ({
       select: () => Promise.resolve({ data: [], error: null }),
       insert: () => Promise.resolve({ data: [], error: null }),
@@ -17,8 +16,6 @@ if (!supabaseUrl || !supabaseAnonKey) {
       delete: () => Promise.resolve({ data: [], error: null }),
       eq: () => Promise.resolve({ data: [], error: null }),
       order: () => Promise.resolve({ data: [], error: null }),
-      gte: () => Promise.resolve({ data: [], error: null }),
-      lte: () => Promise.resolve({ data: [], error: null }),
       single: () => Promise.resolve({ data: null, error: null }),
     }),
     auth: {
@@ -28,10 +25,10 @@ if (!supabaseUrl || !supabaseAnonKey) {
     },
   } as unknown as SupabaseClient
 } else {
-  supabase = createClient(supabaseUrl, supabaseAnonKey)
+  supabaseInstance = createClient(supabaseUrl, supabaseAnonKey)
 }
 
-export { supabase }
+export const supabase = supabaseInstance!
 
 
 // import { createClient } from '@supabase/supabase-js'
